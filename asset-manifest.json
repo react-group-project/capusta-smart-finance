@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/capusta-smart-finance/static/css/main.7acaea2f.css",
+    "main.js": "/capusta-smart-finance/static/js/main.07d3183d.js",
+    "index.html": "/capusta-smart-finance/index.html",
+    "main.7acaea2f.css.map": "/capusta-smart-finance/static/css/main.7acaea2f.css.map",
+    "main.07d3183d.js.map": "/capusta-smart-finance/static/js/main.07d3183d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7acaea2f.css",
+    "static/js/main.07d3183d.js"
+  ]
+}
