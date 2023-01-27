@@ -68,6 +68,8 @@ export const theme = {
     modal: '10px 10px 30px rgba(82, 85, 95, 0.4)',
     selectDropdown: '0px 3px 4px rgba(170, 178, 197, 0.4)',
     mobile: '5px 10px 20px rgba(170, 178, 197, 0.4)',
+    greyOutline: 'inset 0px 0px 0px 2px rgba(246,247,252,1)',
+    whiteOutline: 'inset 0px 0px 0px 2px rgba(255,255,255,1)',
   },
   filters: {
     googleButton: 'drop-shadow(1px 2px 3px rgba(170, 178, 197, 0.2))',
