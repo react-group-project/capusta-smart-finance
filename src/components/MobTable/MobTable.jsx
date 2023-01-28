@@ -1,17 +1,16 @@
-import { TableRow } from './TableRow/TableRow';
 import {
-  StyledTable,
-  Thead,
-  TableWrapper,
-  Th,
-  TBody,
-  TbodyWrapper,
-  TheadWrapper,
-  HeadRow,
-} from './Table.styled';
-// import { useSelector } from 'react-redux';
+  Item,
+  CategoryWrapper,
+  EmountWrapper,
+  List,
+  Descr,
+  Content,
+  Emout,
+  Icon,
+  Button,
+} from './MobTable.styled';
 
-export const Table = () => {
+export const MobTable = () => {
   const incomes = [
     {
       description: 'Income description',
@@ -80,40 +79,28 @@ export const Table = () => {
     },
   ];
 
-  //   const incomes = useSelector()
-
   return (
-    <TableWrapper>
-      <TheadWrapper>
-        <Thead>
-          <HeadRow>
-            <Th>Date</Th>
-            <Th>Descripton</Th>
-            <Th>Category</Th>
-            <Th>Sum</Th>
-            <Th></Th>
-          </HeadRow>
-        </Thead>
-      </TheadWrapper>
-      <TbodyWrapper>
-        <StyledTable>
-          <TBody>
-            {incomes.map(income => {
-              const { date, description, category, amount, _id, type } = income;
-              return (
-                <TableRow
-                  key={_id}
-                  date={date}
-                  description={description}
-                  category={category}
-                  amount={amount}
-                  type={type}
-                />
-              );
-            })}
-          </TBody>
-        </StyledTable>
-      </TbodyWrapper>
-    </TableWrapper>
+    <List>
+      {incomes.map(income => {
+        const { date, description, category, amount, _id } = income;
+        return (
+          <Item key={_id}>
+            <div>
+              <Descr>{description}</Descr>
+              <CategoryWrapper>
+                <Content>{date}</Content>
+                <Content>{category}</Content>
+              </CategoryWrapper>
+            </div>
+            <EmountWrapper>
+              <Emout>{amount}</Emout>
+              <Button>
+                <Icon />
+              </Button>
+            </EmountWrapper>
+          </Item>
+        );
+      })}
+    </List>
   );
 };

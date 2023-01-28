@@ -2,11 +2,15 @@ import styled from 'styled-components';
 import { theme } from 'theme';
 
 export const TableWrapper = styled.div`
-  width: 746px;
-  height: 382px;
-  position: relative;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  width: 624px;
+  @media screen and (min-width: ${theme.breakpoints[2]}) {
+    width: 746px;
+  }
+`;
+
+export const TbodyWrapper = styled.div`
+  height: 344px;
+
   overflow-y: auto;
   scrollbar-gutter: both-edges;
   &::-webkit-scrollbar {
@@ -31,19 +35,38 @@ export const StyledTable = styled.table`
   font-size: ${theme.fontSizes[2]}px;
 `;
 
+export const TheadWrapper = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+
+  overflow: hidden;
+`;
+
+export const HeadRow = styled.tr`
+  /* &:last-child {
+    width: 108px;
+  } */
+`;
+
 export const Thead = styled.thead`
+  width: 100%;
   border-radius: 10px;
   background-color: ${theme.colors.grey.light};
-  position: sticky;
-  top: 1px;
-  right: 0;
-  width: 100%;
 
   text-transform: uppercase;
 `;
 
 export const Th = styled.th`
   padding: 13px;
+  &:last-child {
+    width: 89px;
+    @media screen and (min-width: ${theme.breakpoints[2]}) {
+      width: 109px;
+    }
+  }
 `;
 
 export const TBody = styled.tbody`

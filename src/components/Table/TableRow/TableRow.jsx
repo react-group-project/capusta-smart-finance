@@ -1,5 +1,6 @@
 // import { useDispatch } from 'react-redux';
-import { Tr, Td, Button } from './TableRow.styled';
+import { Tr, Td, Button, Icon, Ttrash } from './TableRow.styled';
+// import { IoTrashOutline } from 'react-icons/io5';
 
 export const TableRow = ({ date, description, category, amount, type }) => {
   //   const dispatch = useDispatch();
@@ -13,11 +14,12 @@ export const TableRow = ({ date, description, category, amount, type }) => {
       <Td>{description}</Td>
       <Td>{category}</Td>
       <Td type={type}>{type === 'expenses' ? `-${amount}` : amount}</Td>
-      <Td>
+      <Ttrash trash>
         <Button type="button" onClick={handlDeleteItem}>
-          &
+          {/* <IoTrashOutline /> */}
+          <Icon />
         </Button>
-      </Td>
+      </Ttrash>
     </Tr>
   );
 };

@@ -16,8 +16,6 @@ export const Summary = () => {
     Декабрь: 123,
   };
 
-  console.log(Object.entries(monthStats));
-
   return (
     <>
       <Table>
