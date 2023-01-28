@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/capusta-smart-finance/static/css/main.7acaea2f.css",
-    "main.js": "/capusta-smart-finance/static/js/main.07d3183d.js",
+    "main.css": "/capusta-smart-finance/static/css/main.c0c48c1c.css",
+    "main.js": "/capusta-smart-finance/static/js/main.9592c24a.js",
     "index.html": "/capusta-smart-finance/index.html",
-    "main.7acaea2f.css.map": "/capusta-smart-finance/static/css/main.7acaea2f.css.map",
-    "main.07d3183d.js.map": "/capusta-smart-finance/static/js/main.07d3183d.js.map"
+    "main.c0c48c1c.css.map": "/capusta-smart-finance/static/css/main.c0c48c1c.css.map",
+    "main.9592c24a.js.map": "/capusta-smart-finance/static/js/main.9592c24a.js.map"
   },
   "entrypoints": [
-    "static/css/main.7acaea2f.css",
-    "static/js/main.07d3183d.js"
+    "static/css/main.c0c48c1c.css",
+    "static/js/main.9592c24a.js"
   ]
 }
