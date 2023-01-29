@@ -7,23 +7,33 @@ import { selectPeriod } from './../../redux/transactions/transactions.selectors'
 
 export default function ReportsPage() {
     const dispatch = useDispatch();
+    const [category, setCategory] = useState('');
+    const getCategory = category => {
+        setCategory(category[0]);
+    };
+
     const data = useSelector(selectPeriod);
-    const data1 = data.expenses?.data?.Health?.list.reduce(
+    const statCategories = Object.entries(data?.expenses.data);
+
+    const chartData = data.expenses?.data?.[category]?.list.reduce(
         (acc, item) => ({
             labels: [...acc.labels, item.description],
             data: [...acc.data, item.amount],
         }),
         { labels: [], data: [] }
     );
-    console.log(data);
+
     const [date, setDate] = useState('2023-01');
     useEffect(() => {
         dispatch(getPeriodDataThunk({ date }));
     }, [date, dispatch]);
     return (
         <>
-            <Reports />
-            <CommonChart stats={data1} />
+            <Reports
+                statCategories={statCategories}
+                getCategory={getCategory}
+            />
+            <CommonChart stats={chartData} />
         </>
     );
 }

@@ -11,13 +11,16 @@ import Salary from 'components/Icons/Salary';
 import Sports from 'components/Icons/Sports';
 import Technique from 'components/Icons/Technique';
 import Transport from 'components/Icons/Transport';
+import { Text } from 'components/Common/Text/Text.styled';
+import { Category, IconContainer } from './ReportsItem.styled';
 
-export default function ReportsItem() {
+export default function ReportsItem({ category }) {
     const categories = {
         Transport: <Transport />,
         Health: <Health />,
         Alcohol: <Alcohol />,
         Entertainment: <Entertainment />,
+        Products: <Products />,
         Housing: <Housing />,
         Technique: <Technique />,
         Communal: <Communal />,
@@ -29,21 +32,13 @@ export default function ReportsItem() {
     };
     return (
         <>
-            <div style={{ display: 'flex' }}>
-                <AddIncome />
-                <Alcohol />
-                <Communal />
-                <Education />
-                <Entertainment />
-                <Health />
-                <Housing />
-                <Other />
-                <Products />
-                <Salary />
-                <Sports />
-                <Technique />
-                <Transport />
-            </div>
+            <Category>
+                <Text variant="uppercase" color="grey.dark">
+                    {category[1].total}
+                </Text>
+                <IconContainer>{categories[category[0]]}</IconContainer>
+                <Text variant="uppercase">{category[0]}</Text>
+            </Category>
         </>
     );
 }

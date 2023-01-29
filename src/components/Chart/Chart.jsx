@@ -103,6 +103,7 @@ export default function Chart({ stats }) {
             datalabels: {
                 anchor: 'end',
                 align: 'top',
+                // color: theme.colors.grey.dark,
                 formatter: function (value) {
                     const formattedValue = value.toLocaleString();
                     return formattedValue + ' UAH';

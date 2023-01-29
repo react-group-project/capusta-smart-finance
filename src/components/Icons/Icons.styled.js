@@ -21,14 +21,17 @@ export const IconBg = styled.div`
 `;
 
 export const Svg = styled.svg`
+    display: block;
     position: absolute;
     bottom: 4px;
 `;
 export const BookSvg = styled.svg`
+    display: block;
     position: absolute;
     bottom: 12px;
 `;
 export const CarSvg = styled.div`
+    display: block;
     position: absolute;
     bottom: 8px;
 `;

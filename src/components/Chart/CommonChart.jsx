@@ -6,7 +6,7 @@ export default function CommonChart({ stats }) {
     return (
         <>
             <MediaQuery maxWidth={767}>
-                <MobileChart />
+                <MobileChart stats={stats} />
             </MediaQuery>
             <MediaQuery minWidth={768}>
                 <Chart stats={stats} />
