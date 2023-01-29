@@ -1,3 +1,12 @@
+import Header from './Header/Header.jsx';
+import AppToastContainer from './AppToastContainer';
+
 export const App = () => {
-  return <h1>APP</h1>;
+  return (
+    <>
+      <Header />
+
+      <AppToastContainer />
+    </>
+  );
 };
