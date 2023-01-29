@@ -1,14 +1,14 @@
 import Header from './Header/Header.jsx';
-import Reports from './Reports/Reports.jsx';
-import 
+
+import AppToastContainer from './AppToastContainer';
 
 export const App = () => {
+  return (
+    <>
+      <Header />
 
-    return (
-        <>
-            <button onClick={}>login</button>
-            {/* <Header /> */}
-            <Reports />
-        </>
-    );
+      <AppToastContainer />
+    </>
+  );
+
 };
