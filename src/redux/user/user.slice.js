@@ -19,14 +19,10 @@ const userSlice = createSlice({
       .addCase(loginThunk.fulfilled, (state, { payload }) => {
         state.balance = payload.userData.balance;
         state.email = payload.userData.email;
-        state.transactions = payload.userData.transactions;
       })
-      .addCase(logoutThunk.fulfilled, () => userInitialState)
-      .addCase(logoutThunk.rejected, () => userInitialState)
       .addCase(getUserInfoThunk.fulfilled, (state, { payload }) => {
         state.balance = payload.balance;
         state.email = payload.email;
-        state.transactions = payload.transactions;
       })
       .addCase(addUserBalanceThunk.fulfilled, (state, { payload }) => {
         state.balance = payload.newBalance;
@@ -40,6 +36,9 @@ const userSlice = createSlice({
       .addCase(deleteTransactionThunk.fulfilled, (state, { payload }) => {
         state.balance = payload.newBalance;
       })
+      .addCase(logoutThunk.fulfilled, () => userInitialState)
+      .addCase(logoutThunk.rejected, () => userInitialState)
+      // TODO: додати очищення після помилки 401
       .addMatcher(isActionPending(userSlice.name), state => {
         state.status = Status.PENDING;
         state.error = null;

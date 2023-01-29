@@ -118,7 +118,7 @@ export const deleteTransactionThunk = createAsyncThunk(
     try {
       const data = await deleteTransactionService(transactionId);
 
-      dispatch(getExpenseThunk());
+      dispatch(getAllTransactionsThunk());
       successNotification(`Transaction deleted.`);
 
       return data;
@@ -129,6 +129,7 @@ export const deleteTransactionThunk = createAsyncThunk(
   }
 );
 
+// QUESTION: 1) Спитати, як викликати цю функцію. Можно лі взагалі не викликати при перемиканнкі income expenses на home page, Тому що при видаленні чи додаванні транзакціі робиться запит на сервер. 2) робити promise.all для dispatch чи для звичаних запиті?
 // Get all transactions
 export const getAllTransactionsThunk = createAsyncThunk(
   'transactions/getAllTransactions',
@@ -177,20 +178,57 @@ export const getExpenseCategoriesThunk = createAsyncThunk(
   }
 );
 
+// Get data for a specified period
 export const getPeriodDataThunk = createAsyncThunk(
   'transactions/detPeriodData',
   async (body, { rejectWithValue }) => {
     try {
-      console.log(body);
       const data = await getPeriodDataService(body);
+      const expenses = convertTransaction(
+        data.expenses.expenseTotal,
+        data.expenses.expensesData
+      );
+      const incomes = convertTransaction(
+        data.incomes.incomeTotal,
+        data.incomes.incomesData
+      );
 
-      console.log('Data from period', data);
-
-      return data;
+      return { incomes, expenses };
     } catch (error) {
-      console.log(error);
       checkForAutorizationError(error.response?.status);
       return rejectWithValue(processingError(error));
     }
   }
 );
+
+// TODO: перенести до допоміжних функцій
+function convertTransaction(total, data) {
+  return {
+    total: total,
+    data: Object.keys(data).reduce((acc, key) => {
+      return {
+        ...acc,
+        [convertExpenseValueToEng(key) || convertIncomeValueToEng(key)]: {
+          total: data[key].total,
+          list: convertObjectToDescriptionList(data[key]),
+        },
+      };
+    }, {}),
+  };
+}
+
+function convertObjectToDescriptionList(obj) {
+  return Object.keys(obj).reduce(
+    (acc, key) =>
+      key === 'total'
+        ? acc
+        : [
+            ...acc,
+            {
+              description: key,
+              amount: obj[key],
+            },
+          ],
+    []
+  );
+}

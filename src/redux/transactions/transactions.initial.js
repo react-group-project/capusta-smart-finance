@@ -9,23 +9,15 @@ export const transactionsInitialState = {
     data: [],
     monthsStats: [],
   },
+  // QUESTION: як правильно зробити отримання данних за певний період? Зберігати в сторі чи просто робити запит на сервер і повертати данні напряму, без запису в стейт?
   period: {
-    income: {
+    incomes: {
       total: 0,
-      data: [],
+      data: {},
     },
-    expense: {
-      total: 5000,
-      data: {
-        Health: {
-          total: 4000,
-          list: [{ description: 'Health 10', value: 30 }],
-        },
-        Other: {
-          total: 1000,
-          list: [{ description: 'Health 10', value: 30 }],
-        },
-      },
+    expenses: {
+      total: 0,
+      data: {},
     },
   },
   status: Status.IDLE,

@@ -13,6 +13,13 @@ export const selectIncomesData = state => selectIncomes(state).data;
 export const selectIncomesMonthsStats = state =>
   selectIncomes(state).monthsStats;
 
+export const selectPeriod = state => selectTransactions(state).period;
+
+export const selectTransactionsStatus = state =>
+  selectTransactions(state).status;
+
+export const selectTransactionsError = state => selectTransactions(state).error;
+
 // All transactions incomes and expenses
 export const selectAllTransactionsData = createSelector(
   [selectExpensesData, selectIncomesData],
