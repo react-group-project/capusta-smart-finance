@@ -23,14 +23,3 @@ export const TableRow = ({ date, description, category, amount, type }) => {
     </Tr>
   );
 };
-
-// {
-//   "incomes": [
-//     {
-//       "description": "Income description",
-//       "amount": 100,
-//       "date": "2020-12-31",
-//       "category": "Доход",
-//       "_id": "507f1f77bcf86cd799439011"
-//     }
-//   ],
