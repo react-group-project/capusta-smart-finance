@@ -13,6 +13,8 @@ import {
   selectIncomesPeriodByCategory,
   selectExposesPeriodByCategory,
 } from 'redux/transactions/transactions.selectors';
+import { Container } from 'components/Common/Container/Container.styled';
+import { BackgroundHome } from 'components/Common/BackgroundHome/BackgroundHome.styled';
 
 export default function HomePage() {
   const dispatch = useDispatch();
@@ -63,51 +65,53 @@ export default function HomePage() {
     dispatch(getPeriodDataThunk({ date: '2023-01' }));
   }, [dispatch]);
   return (
-    <>
-      <h1>Home page</h1>
-      <div>{balance}</div>
+    <BackgroundHome>
+      <Container>
+        <>Home page</>
+        <div>{balance}</div>
 
-      <div>
-        <input
-          type="text"
-          value={description}
-          onChange={e => setDescription(e.target.value)}
-        />
-        <select value={category} onChange={e => setCategory(e.target.value)}>
-          <option calue="Alcohol">Alcohol</option>
-          <option calue="Entertainment">Entertainment</option>
-          <option calue="Health">Health</option>
-        </select>
-        <input
-          type="number"
-          value={amount}
-          onChange={e => setAmount(e.target.value)}
-        />
-        <button onClick={addExpenseHandler}>Add Expenses</button>
-      </div>
-      <div>
-        <input
-          type="text"
-          value={incomeDescription}
-          onChange={e => setIncomeDescription(e.target.value)}
-        />
-        <select
-          value={incomeCategory}
-          onChange={e => setIncomeCategory(e.target.value)}
-        >
-          <option calue="Salary">Salary</option>
-          <option calue="Add. income">Add. income</option>
-        </select>
-        <input
-          type="number"
-          value={incomeAmount}
-          onChange={e => setIncomeAmount(e.target.value)}
-        />
-        <button onClick={addIncomeHandler}>Add Incomes</button>
-      </div>
-      <Suspense fallback={null}>
-        <Outlet />
-      </Suspense>
-    </>
+        <div>
+          <input
+            type="text"
+            value={description}
+            onChange={e => setDescription(e.target.value)}
+          />
+          <select value={category} onChange={e => setCategory(e.target.value)}>
+            <option calue="Alcohol">Alcohol</option>
+            <option calue="Entertainment">Entertainment</option>
+            <option calue="Health">Health</option>
+          </select>
+          <input
+            type="number"
+            value={amount}
+            onChange={e => setAmount(e.target.value)}
+          />
+          <button onClick={addExpenseHandler}>Add Expenses</button>
+        </div>
+        <div>
+          <input
+            type="text"
+            value={incomeDescription}
+            onChange={e => setIncomeDescription(e.target.value)}
+          />
+          <select
+            value={incomeCategory}
+            onChange={e => setIncomeCategory(e.target.value)}
+          >
+            <option calue="Salary">Salary</option>
+            <option calue="Add. income">Add. income</option>
+          </select>
+          <input
+            type="number"
+            value={incomeAmount}
+            onChange={e => setIncomeAmount(e.target.value)}
+          />
+          <button onClick={addIncomeHandler}>Add Incomes</button>
+        </div>
+        <Suspense fallback={null}>
+          <Outlet />
+        </Suspense>
+      </Container>
+    </BackgroundHome>
   );
 }
