@@ -1,111 +1,70 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
+import { Container } from '../Common/Container/Container.styled';
 import { Text } from '../Common/Text/Text.styled';
 import {
-  Container,
-  UserInitials,
-  UserInfoWrapper,
-  Decorline,
-  UserEmail,
-  StyledHeader,
-  LogInBtn,
+    HeaderContainer,
+    UserInitials,
+    UserInfoWrapper,
+    Decorline,
+    UserEmail,
+    StyledHeader,
 } from './Header.styled';
 import ExitButton from './ExitButton';
 import Logo from '../Header/Logo/';
 import ExitPopUp from '../Header/ExitPopUp/';
 import Modal from '../Modal/';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectToken } from 'redux/auth/auth.selectors';
+import { selectUserEmail } from 'redux/user/user.selectors';
+import { logoutThunk } from 'redux/auth/auth.thunk';
 
 export default function Header() {
-  //--------------------------------------------/ тестовий код - заглушка
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  let userEmail = useRef('');
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const isLoggedIn = useSelector(selectToken);
+    const userEmail = useSelector(selectUserEmail);
+    const dispatch = useDispatch();
 
-  const LogIn = () => {
-    if (isLoggedIn) return;
-    const enteredData = prompt('Enter Your e-mail to log in');
-    if (enteredData) {
-      setIsLoggedIn(true);
-      userEmail.current = enteredData;
-    }
-  };
+    const LogOut = () => {
+        toggleModalVisibility();
+        dispatch(logoutThunk());
+    };
 
-  const LogOut = () => {
-    toggleModalVisibility();
-    setIsLoggedIn(false);
-  };
+    const getUserInitials = () => {
+        if (!userEmail) return '';
+        return userEmail[0];
+    };
 
-  const getUserInitials = () => {
-    if (!userEmail.current) return '';
-    return userEmail.current[0];
-  };
-  //------------------------------------------------/ тестовий код - заглушка
+    const toggleModalVisibility = () => {
+        setIsModalVisible(!isModalVisible);
+    };
 
-  const toggleModalVisibility = () => {
-    setIsModalVisible(!isModalVisible);
-  };
-
-  return (
-    <StyledHeader>
-      <Container>
-        <Logo />
-        {isLoggedIn && (
-          <UserInfoWrapper>
-            <UserInitials>
-              <Text variant="boldUppercase">{getUserInitials()}</Text>
-            </UserInitials>
-            <UserEmail>{userEmail.current}</UserEmail>
-            <Decorline />
-            <ExitButton onClick={toggleModalVisibility} />
-          </UserInfoWrapper>
-        )}
-        {!isLoggedIn && (
-          <LogInBtn on onClick={LogIn}>
-            Log in
-          </LogInBtn>
-        )}
-        {isModalVisible && (
-          <Modal toggleModalVisibility={toggleModalVisibility}>
-            <ExitPopUp
-              LogOut={LogOut}
-              toggleModalVisibility={toggleModalVisibility}
-            />
-          </Modal>
-        )}
-      </Container>
-    </StyledHeader>
-  );
+    return (
+        <StyledHeader>
+            <Container>
+                <HeaderContainer>
+                    <Logo />
+                    {isLoggedIn && (
+                        <UserInfoWrapper>
+                            <UserInitials>
+                                <Text variant="boldUppercase">
+                                    {getUserInitials()}
+                                </Text>
+                            </UserInitials>
+                            <UserEmail>{userEmail}</UserEmail>
+                            <Decorline />
+                            <ExitButton onClick={toggleModalVisibility} />
+                        </UserInfoWrapper>
+                    )}
+                    {isModalVisible && (
+                        <Modal toggleModalVisibility={toggleModalVisibility}>
+                            <ExitPopUp
+                                LogOut={LogOut}
+                                toggleModalVisibility={toggleModalVisibility}
+                            />
+                        </Modal>
+                    )}
+                </HeaderContainer>
+            </Container>
+        </StyledHeader>
+    );
 }
-
-//оригінальний компонент, якщо щось нахімічу з заглушками)))
-// export default function Header() {
-//     const [isModalVisible, setIsModalVisible] = useState(false);
-//     // const [userEmail, setUserEmail] = useState(false);
-//     // const [isLoggedIn, setIsLogged] = useState(false);
-
-//     const toggleModalVisibility = () => {
-//         setIsModalVisible(!isModalVisible);
-//     };
-
-//     return (
-//         <StyledHeader>
-//             <Container>
-//                 <Logo />
-//                 <UserInfoWrapper>
-//                     <UserInitials>
-//                         <Text variant="boldUppercase">DS</Text>
-//                     </UserInitials>
-//                     <UserEmail>mr.shpak@gmail.com</UserEmail>
-//                     <Decorline />
-//                     <ExitButton onClick={toggleModalVisibility} />
-//                 </UserInfoWrapper>
-//                 {isModalVisible && (
-//                     <Modal toggleModalVisibility={toggleModalVisibility}>
-//                         <ExitPopUp
-//                             toggleModalVisibility={toggleModalVisibility}
-//                         />
-//                     </Modal>
-//                 )}
-//             </Container>
-//         </StyledHeader>
-//     );
-// }
