@@ -5,6 +5,7 @@ import { lazy, useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import AppLayout from './Layouts/AppLayout';
 import { useDispatch, useSelector } from 'react-redux';
+import { AddingExpensessArea } from './AddingExpensessArea/AddingExpensessArea';
 import {
   selectIsAuthorized,
   selectIsRefreshing,
@@ -43,10 +44,7 @@ export const App = () => {
             }
           >
             <Route index element={<Navigate to={routes.EXPENSES} replace />} />
-            <Route
-              path={routes.EXPENSES}
-              element={<h2>Expenses component</h2>}
-            />
+            <Route path={routes.EXPENSES} element={<AddingExpensessArea />} />
             <Route path={routes.INCOME} element={<h2>Income element</h2>} />
           </Route>
           <Route
