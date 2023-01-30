@@ -7,9 +7,10 @@ export const BackgroundHome = styled.div`
   z-index: 0;
 
   width: 100%;
-  min-height: calc(
+  height: 100%;
+  /* min-height: calc(
     100vh - 57px
-  ); //height 100% встановитти не виходить - прийшлось використовувати (вьюпорт - header);
+  ); //height 100% встановитти не виходить - прийшлось використовувати (вьюпорт - header); */
 
   @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
     background-image: url(${decorHomeBgTablet});

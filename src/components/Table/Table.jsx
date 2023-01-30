@@ -11,7 +11,7 @@ import {
 } from './Table.styled';
 // import { useSelector } from 'react-redux';
 
-export const Table = () => {
+export default function Table() {
   const incomes = [
     {
       description: 'Income description',
@@ -116,4 +116,4 @@ export const Table = () => {
       </TbodyWrapper>
     </TableWrapper>
   );
-};
+}

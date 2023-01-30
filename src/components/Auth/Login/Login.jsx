@@ -7,7 +7,7 @@ import {
 } from 'redux/transactions/transactions.thunk';
 
 export default function Login() {
-  const [email, setEmail] = useState('goit.test6.user@test.com');
+  const [email, setEmail] = useState('goit.test4.user@test.com');
   const [password, setPassword] = useState('qwerty123');
   const dispatch = useDispatch();
   const clickHandler = () => {

@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 import { variant } from 'styled-system';
 export const Text = styled('p')(
-  { textTransform: 'uppercase' },
+  {
+    textTransform: 'uppercase',
+    margin: 0,
+    padding: 0,
+  },
   variant({
     variants: {
       boldUppercase: {
