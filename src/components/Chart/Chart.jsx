@@ -10,6 +10,8 @@ import {
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Bar } from 'react-chartjs-2';
 import { ChartContainer, Container } from './Chart.styled';
+import { useCallback, useEffect } from 'react';
+
 ChartJs.register(
     BarElement,
     CategoryScale,
@@ -50,8 +52,8 @@ export default function Chart({ stats }) {
                     bottomRight: 0,
                 },
 
-                barThickness: 'flex',
-                maxBarThickness: 38,
+                // barThickness: 'flex',
+                barThickness: 38,
             },
         ],
     };
@@ -60,8 +62,8 @@ export default function Chart({ stats }) {
         responsive: true,
 
         maintainAspectRatio: false,
-        categoryPercentage: 0.5,
-        barPercentage: 1,
+        // categoryPercentage: 0.5,
+        // barPercentage: 1,
 
         layout: {
             padding: {
@@ -72,6 +74,7 @@ export default function Chart({ stats }) {
         scales: {
             x: {
                 beginAtZero: true,
+                // offset: false,
                 border: {
                     display: false,
                 },
@@ -80,20 +83,35 @@ export default function Chart({ stats }) {
                 },
                 ticks: {
                     padding: 0,
+                    // ticks: context => {
+                    //     console.log(context[0].label.length);
+                    //     if (context[0].label.length > 6) {
+                    //         return context[0].label.slice(0, 5) + '...';
+                    //     }
+                    // },
                 },
             },
             y: {
                 border: {
                     display: false,
                 },
+                grace: '40%',
 
                 grid: {
                     lineWidth: 2,
-                    color: theme.colors.lilac.base,
+                    color: ctx => {
+                        if (stats?.data) {
+                            if (ctx.tick.value >= Math.max(...stats?.data)) {
+                                return 'transparent';
+                            }
+                            return theme.colors.lilac.base;
+                        }
+                    },
                 },
                 ticks: {
                     display: false,
-
+                    sugMin: 100,
+                    sugMax: 500,
                     // stepSize: 600,
                     // maxTicksLimit: 9,
                 },
@@ -103,14 +121,31 @@ export default function Chart({ stats }) {
             datalabels: {
                 anchor: 'end',
                 align: 'top',
-                // color: theme.colors.grey.dark,
+                color: theme.colors.grey.dark,
                 formatter: function (value) {
-                    const formattedValue = value.toLocaleString();
-                    return formattedValue + ' UAH';
+                    if (value) {
+                        const formattedValue = value.toLocaleString();
+                        return formattedValue + ' UAH';
+                    }
                 },
             },
+            // tooltip: {
+            //     callbacks: {
+            //         title: context => {
+            //             console.log(context[0].label.length);
+            //             if (context[0].label.length > 6) {
+            //                 return context[0].label.slice(0, 5) + '...';
+            //             }
+            //         },
+            //     },
+            // },
         },
     };
+
+    data.labels.unshift('');
+    data.labels.push('');
+    data.datasets[0].data.push(null);
+    data.datasets[0].data.unshift(null);
 
     return (
         <Container>

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import {
     typography,
     space,
@@ -11,13 +12,17 @@ import {
     flex,
 } from 'styled-system';
 export const Text = styled('p')(
-    { textTransform: 'uppercase' },
+    {
+        textTransform: 'uppercase',
+    },
     variant({
         variants: {
             boldUppercase: {
                 fontWeight: 'bold',
                 letterSpacing: 'small',
                 color: 'black',
+                fontSize: 14,
+                lineHeight: 16 / 14,
             },
             normalUppercase: {},
         },

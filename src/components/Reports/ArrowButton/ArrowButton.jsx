@@ -1,31 +1,29 @@
-import {
-    PrevArrow,
-    NextArrow,
-    Slider,
-    StyledButton,
-} from './ArrowButton.styled';
+import { Slider, StyledButton } from './ArrowButton.styled';
+import { BackArrow, NextArrow } from '../Arrows/Arrows';
 import { useState } from 'react';
 import { Text } from 'components/Common/Text/Text.styled';
-export default function ArrowButton() {
+export default function ArrowButton({ getState }) {
     const [value, setValue] = useState('expenses');
-    const prevHandler = () => {
-        setValue('expenses');
+    getState(value);
+    const onChange = () => {
+        if (value === 'expenses') {
+            setValue('incomes');
+        } else {
+            setValue('expenses');
+        }
     };
-    const nextHandler = () => {
-        setValue('income');
-    };
+
     return (
         <>
             <Slider>
-                <StyledButton onClick={prevHandler}>
-                    <PrevArrow />
+                <StyledButton onClick={onChange}>
+                    <BackArrow />
                 </StyledButton>
                 <Text variant="boldUppercase" mr="16px" ml="16px">
-                    {' '}
                     {value}
                 </Text>
 
-                <StyledButton onClick={nextHandler}>
+                <StyledButton onClick={onChange}>
                     <NextArrow />
                 </StyledButton>
             </Slider>

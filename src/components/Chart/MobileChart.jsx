@@ -6,6 +6,7 @@ import {
     Tooltip,
 } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
+import { useRef } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { theme } from 'theme';
 import { MobileChartContainer } from './MobileChart.styled';
@@ -18,6 +19,7 @@ ChartJs.register(
 );
 
 export default function MobileChart({ stats }) {
+    const refContainer = useRef();
     const data = {
         labels: stats?.labels || [],
         // labels: [
@@ -56,8 +58,9 @@ export default function MobileChart({ stats }) {
                     bottomRight: 10,
                 },
 
-                barThickness: 'flex',
-                maxBarThickness: 15,
+                // barThickness: 'flex',
+                // maxBarThickness: 15,
+                barThickness: 15,
             },
         ],
     };
@@ -88,7 +91,8 @@ export default function MobileChart({ stats }) {
                 },
             },
             y: {
-                beginAtZero: true,
+                // beginAtZero: true,
+                // grace: '10%',
                 border: {
                     display: false,
                 },
@@ -97,6 +101,7 @@ export default function MobileChart({ stats }) {
                 },
                 ticks: {
                     mirror: true,
+                    color: theme.colors.grey.dark,
                     fontSize: 10,
                     lineHeight: 1.2,
                     labelOffset: -17,
@@ -110,9 +115,12 @@ export default function MobileChart({ stats }) {
                 align: 'end',
                 offset: 10,
                 formatter: function (value) {
-                    const formattedValue = value.toLocaleString();
-                    return formattedValue + ' UAH';
+                    if (value) {
+                        const formattedValue = value.toLocaleString();
+                        return formattedValue + ' UAH';
+                    }
                 },
+                color: theme.colors.grey.dark,
                 font: {
                     size: 10,
                     lineHeight: 1.2,
@@ -120,8 +128,17 @@ export default function MobileChart({ stats }) {
             },
         },
     };
+    const changeHeight = () => {
+        const totalBars = data.labels.length;
+
+        if (totalBars > 2) {
+            const newHeight = (totalBars - 2) * 60 + 120;
+            refContainer.current.style.height = newHeight + 'px';
+        }
+    };
+    changeHeight();
     return (
-        <MobileChartContainer>
+        <MobileChartContainer ref={refContainer}>
             <Bar data={data} options={options} />
         </MobileChartContainer>
     );

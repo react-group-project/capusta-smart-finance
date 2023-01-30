@@ -13,6 +13,7 @@ import Technique from 'components/Icons/Technique';
 import Transport from 'components/Icons/Transport';
 import { Text } from 'components/Common/Text/Text.styled';
 import { Category, IconContainer } from './ReportsItem.styled';
+import { convertMoneyToString } from 'helpers';
 
 export default function ReportsItem({ category }) {
     const categories = {
@@ -23,18 +24,19 @@ export default function ReportsItem({ category }) {
         Products: <Products />,
         Housing: <Housing />,
         Technique: <Technique />,
-        Communal: <Communal />,
-        Sports: <Sports />,
+        'Communal, communication': <Communal />,
+        'Sports, hobbies': <Sports />,
         Education: <Education />,
         Other: <Other />,
         Salary: <Salary />,
-        AddIncome: <AddIncome />,
+        'Add. income': <AddIncome />,
     };
+
     return (
         <>
             <Category>
                 <Text variant="uppercase" color="grey.dark">
-                    {category[1].total}
+                    {convertMoneyToString(category[1].total)}
                 </Text>
                 <IconContainer>{categories[category[0]]}</IconContainer>
                 <Text variant="uppercase">{category[0]}</Text>
