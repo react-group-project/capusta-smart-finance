@@ -1,9 +1,16 @@
 import AppToastContainer from './AppToastContainer';
 import { routes } from 'constants/routes';
 import { MobilePage, PrivatePage, RestrictedPage } from 'pages/access';
-import { lazy } from 'react';
+import { lazy, useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import AppLayout from './Layouts/AppLayout';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  selectIsAuthorized,
+  selectIsRefreshing,
+  selectRefreshToken,
+} from 'redux/auth/auth.selectors';
+import { refreshTokenThunk } from 'redux/auth/auth.thunk';
 
 const HomePage = lazy(() => import('pages/Home'));
 const AuthPage = lazy(() => import('pages/Auth'));
@@ -12,6 +19,18 @@ const Registration = lazy(() => import('components/Auth/Registration'));
 const ReportsPage = () => <h2>Reports</h2>;
 
 export const App = () => {
+  const dispatch = useDispatch();
+  const refreshToken = useSelector(selectRefreshToken);
+  const isAuthorized = useSelector(selectIsAuthorized);
+  const isRefreshing = useSelector(selectIsRefreshing);
+
+  useEffect(() => {
+    if (refreshToken && !isAuthorized && !isRefreshing) {
+      dispatch(refreshTokenThunk());
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch]);
+
   return (
     <>
       <Routes>
@@ -50,14 +69,28 @@ export const App = () => {
             <Route path={routes.REGISTRATION} element={<Registration />} />
           </Route>
           <Route
-            path={routes.MOBILE_FORM}
+            path={routes.EXPENSES_MOBILE}
             element={
               <PrivatePage
                 redirect={routes.LOGIN}
                 component={
                   <MobilePage
-                    redirect={routes.HOME}
-                    component={<h2>Mobile form</h2>}
+                    redirect={routes.EXPENSES}
+                    component={<h2>Expenses Mobile form</h2>}
+                  />
+                }
+              />
+            }
+          />
+          <Route
+            path={routes.INCOME_MOBILE}
+            element={
+              <PrivatePage
+                redirect={routes.LOGIN}
+                component={
+                  <MobilePage
+                    redirect={routes.INCOME}
+                    component={<h2>Income Mobile form</h2>}
                   />
                 }
               />

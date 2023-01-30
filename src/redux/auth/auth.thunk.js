@@ -4,8 +4,11 @@ import { token } from 'services/tokenApi';
 import {
   loginUserService,
   logoutUserService,
+  refreshTokenService,
   registerUserService,
 } from 'services/auth.service';
+import { selectRefreshToken, selectTokenSid } from './auth.selectors';
+import { getUserInfoThunk } from 'redux/user/user.thunk';
 
 export const registrationThunk = createAsyncThunk(
   'auth/registration',
@@ -45,6 +48,25 @@ export const logoutThunk = createAsyncThunk(
       return rejectWithValue(processingError(error));
     } finally {
       token.unset();
+    }
+  }
+);
+
+export const refreshTokenThunk = createAsyncThunk(
+  'auth/refreshToken',
+  async (_, { rejectWithValue, getState, dispatch }) => {
+    const sid = selectTokenSid(getState());
+    const refreshToken = selectRefreshToken(getState());
+
+    try {
+      const data = await refreshTokenService(refreshToken, sid);
+      token.set(data.newAccessToken);
+      await dispatch(getUserInfoThunk());
+
+      return data;
+    } catch (error) {
+      token.unset();
+      return rejectWithValue(processingError(error));
     }
   }
 );
