@@ -1,10 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import { Status } from 'constants';
 import { isActionFulfilled, isActionPending, isActionRejected } from 'helpers';
 import { authInitialState } from './auth.initial';
 import { loginThunk, logoutThunk } from './auth.thunk';
+import { refreshTokenThunk } from 'redux/auth/auth.thunk';
 
-// QUESTION: спитат про 400 error code
 const isAuthError = action => action?.payload?.status === 401;
 
 const authSlice = createSlice({
@@ -12,10 +14,21 @@ const authSlice = createSlice({
   initialState: authInitialState,
   extraReducers: builder => {
     builder
+      .addCase(refreshTokenThunk.pending, state => {
+        state.isRefreshing = true;
+      })
+      .addCase(refreshTokenThunk.fulfilled, (state, { payload }) => {
+        state.accessToken = payload.newAccessToken;
+        state.refreshToken = payload.newRefreshToken;
+        state.sid = payload.newSid;
+        state.isAuthorized = true;
+        state.isRefreshing = false;
+      })
       .addCase(loginThunk.fulfilled, (state, { payload }) => {
         state.accessToken = payload.accessToken;
         state.refreshToken = payload.refreshToken;
         state.sid = payload.sid;
+        state.isAuthorized = true;
       })
       .addCase(logoutThunk.fulfilled, () => authInitialState)
       .addCase(logoutThunk.rejected, () => authInitialState)
@@ -27,8 +40,9 @@ const authSlice = createSlice({
         state.status = Status.FULFILLED;
       })
       .addMatcher(isActionRejected(authSlice.name), (state, { payload }) => {
-        state.error = payload.message;
+        state.error = payload?.message;
         state.status = Status.REJECTED;
+        state.isRefreshing = false;
       })
       .addMatcher(isActionRejected('user', isAuthError), () => authInitialState)
       .addMatcher(
@@ -38,4 +52,11 @@ const authSlice = createSlice({
   },
 });
 
+const persistConfig = {
+  key: 'auth',
+  storage,
+  whitelist: ['refreshToken', 'sid'],
+};
+
 export const authReducer = authSlice.reducer;
+export const persistedAuthReducer = persistReducer(persistConfig, authReducer);
