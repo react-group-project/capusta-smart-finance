@@ -1,26 +1,14 @@
 import styled from 'styled-components';
 
-export const StyledHeader = styled.header``;
+export const StyledHeader = styled.header`
+    height: 57px;
+`;
 
-export const Container = styled.div`
-    margin: 0 auto;
-
+export const HeaderContainer = styled.div`
     display: flex;
     justify-content: space-between;
 
     width: 100%;
-    padding-left: 21px;
-    padding-right: 21px;
-
-    @media screen and (min-width: ${props => props.theme.breakpoints[0]}) {
-        width: ${props => props.theme.breakpoints[0]};
-    }
-    @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
-        width: ${props => props.theme.breakpoints[1]};
-    }
-    @media screen and (min-width: ${props => props.theme.breakpoints[2]}) {
-        width: ${props => props.theme.breakpoints[2]};
-    }
 `;
 
 export const UserInfoWrapper = styled.div`
@@ -64,22 +52,6 @@ export const Decorline = styled.div`
     width: 1px;
     height: 36px;
     background-color: ${props => props.theme.colors.grey.light};
-
-    @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
-        display: block;
-    }
-`;
-
-export const LogInBtn = styled.button`
-    display: none;
-    padding: 0;
-
-    color: inherit;
-    cursor: pointer;
-    border: 0;
-
-    background-color: transparent;
-    text-decoration: underline;
 
     @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
         display: block;

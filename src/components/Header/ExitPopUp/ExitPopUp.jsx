@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-// import propTypes from 'prop-types';
+import propTypes from 'prop-types';
 import { Button } from '../../Common/Button/Button.styled.js';
 
 const CloseIcon = () => {
@@ -51,8 +51,7 @@ const PopUpText = styled.p`
     margin-bottom: 20px;
 
     font-weight: ${props => props.theme.fontWeights.medium};
-    font-size: 14px;
-    /* font-size: ${props => props.theme.fontSizes[4]}; */
+    font-size: ${props => props.theme.fontSizes[4]};
     line-height: ${props => props.theme.lineHeights.small};
 
     text-align: center;
@@ -68,7 +67,7 @@ const PopUpButton = styled(Button)`
     align-items: center;
 `;
 
-export const ExitPopUp = ({ toggleModalVisibility, LogOut }) => {
+const ExitPopUp = ({ toggleModalVisibility, LogOut }) => {
     return (
         <MainLayer>
             <ClosePopUpBtn onClick={toggleModalVisibility}>
@@ -97,8 +96,8 @@ export const ExitPopUp = ({ toggleModalVisibility, LogOut }) => {
     );
 };
 
-// ExitPopUp.propTypes = {
-//     toggleModalVisibility: propTypes.func.isRequired,
-// };
+ExitPopUp.propTypes = {
+    toggleModalVisibility: propTypes.func.isRequired,
+};
 
 export default ExitPopUp;
