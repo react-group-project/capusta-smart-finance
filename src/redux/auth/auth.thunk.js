@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { processingError } from 'helpers';
+import { processingError, successNotification } from 'helpers';
 import { token } from 'services/tokenApi';
 import {
   loginUserService,
@@ -12,6 +12,8 @@ export const registrationThunk = createAsyncThunk(
   async (body, { rejectWithValue }) => {
     try {
       const data = await registerUserService(body);
+
+      successNotification(`"${data.email}" registered success.`);
       return data;
     } catch (error) {
       return rejectWithValue(processingError(error));
@@ -26,7 +28,7 @@ export const loginThunk = createAsyncThunk(
       const data = await loginUserService(body);
       // add token to header in axios request
       token.set(data.accessToken);
-
+      successNotification(`"${data.userData.email}" welcome.`);
       return data;
     } catch (error) {
       return rejectWithValue(processingError(error));

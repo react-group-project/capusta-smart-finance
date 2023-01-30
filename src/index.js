@@ -11,7 +11,6 @@ import { BrowserRouter } from 'react-router-dom';
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
         <BrowserRouter basename="capusta-smart-finance">
-            ~{' '}
             <ThemeProvider theme={theme}>
                 <Provider store={store}>
                     <App />
