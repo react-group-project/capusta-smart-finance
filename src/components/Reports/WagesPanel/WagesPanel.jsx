@@ -17,13 +17,17 @@ export default function WagesPanel() {
       <MobileContainer>
         <Text>Expenses:</Text>
         <NegativeSum>
-          - {convertMoneyToStringWithCurrency(data.expenses.total)}
+          {data.expenses.total === 0
+            ? convertMoneyToStringWithCurrency(data.expenses.total)
+            : '- ' + convertMoneyToStringWithCurrency(data.expenses.total)}
         </NegativeSum>
       </MobileContainer>
       <MobileContainer>
         <Text>Income:</Text>
         <PositiveSum>
-          + {convertMoneyToStringWithCurrency(data.incomes.total)}
+          {data.incomes.total === 0
+            ? convertMoneyToStringWithCurrency(data.incomes.total)
+            : '+ ' + convertMoneyToStringWithCurrency(data.incomes.total)}
         </PositiveSum>
       </MobileContainer>
     </WagesContainer>

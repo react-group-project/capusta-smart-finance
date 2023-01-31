@@ -19,7 +19,7 @@ export default function ArrowButton({ getWages }) {
         <StyledButton onClick={onChange}>
           <BackArrow />
         </StyledButton>
-        <Text variant="boldUppercase" mr="16px" ml="16px">
+        <Text variant="boldUppercase" mr="16px" ml="16px" mt="2px">
           {value}
         </Text>
 

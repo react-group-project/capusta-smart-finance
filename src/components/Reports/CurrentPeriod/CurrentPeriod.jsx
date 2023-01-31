@@ -20,7 +20,7 @@ export default function CurrentPeriod({ date, setDate }) {
         <Button onClick={onClickBackHandler}>
           <BackArrow />
         </Button>
-        <Text variant="boldUppercase" mr="4px" ml="4px">
+        <Text variant="boldUppercase" mr="4px" ml="4px" mb="2px">
           {format(date, 'MMMM yyyy')}
         </Text>
         <Button onClick={onClickNextHandler}>

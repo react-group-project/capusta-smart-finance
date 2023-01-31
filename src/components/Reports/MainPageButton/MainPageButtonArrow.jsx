@@ -1,4 +1,4 @@
-import { Button, ComponentContainer, Text, Svg } from './MainPageButton.styled';
+import { Button, ComponentContainer, Text } from './MainPageButton.styled';
 import { Link, useLocation } from 'react-router-dom';
 import { routes } from 'constants/routes';
 
@@ -8,7 +8,7 @@ export default function MainPageButtonArrow() {
   return (
     <ComponentContainer>
       <Button as={Link} to={toMain}>
-        <Svg
+        <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
           height="24"
@@ -26,9 +26,9 @@ export default function MainPageButtonArrow() {
               <path fill="#fff" d="M0 0H24V24H0z"></path>
             </clipPath>
           </defs>
-        </Svg>
+        </svg>
+        <Text>Main page</Text>
       </Button>
-      <Text>Main page</Text>
     </ComponentContainer>
   );
 }

@@ -12,4 +12,5 @@ export const PaleText = styled.p`
 `;
 export const FlexContainer = styled.div`
   display: flex;
+  align-items: center;
 `;
