@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { theme } from 'theme';
 
 export const FormStyle = styled.form`
-  background-color: $ ${theme.colors.white};
+  background-color: ${theme.colors.white};
   max-width: 100%;
   height: 496px;
   box-shadow: 5px 10px 20px rgba(170, 178, 197, 0.4);
@@ -36,7 +36,7 @@ export const Text = styled.p`
   margin: 0 auto 16px auto;
   letter-spacing: 0.04em;
   color: ${theme.colors.grey.dark};
-    @media screen and (min-width: ${theme.breakpoints[1]}) {
+  @media screen and (min-width: ${theme.breakpoints[1]}) {
     max-width: 100%;
     margin-bottom: 36px;
   }
@@ -96,7 +96,7 @@ export const LabelInput = styled.label`
   margin-bottom: 12px;
   color: ${theme.colors.black};
   @media screen and (min-width: ${theme.breakpoints[1]}) {
-     font-size: 12px;
+    font-size: 12px;
   }
 `;
 
@@ -160,14 +160,14 @@ export const ButtonGoogle = styled.button`
   :hover {
     box-shadow: 1px 2px 6px 1px rgba(33, 33, 33, 0.4);
   }
-  
-    svg {
-      width: 18px;
-      height: 18px;
-      margin-right: 5px;
-      position: relative;
-      z-index: -1;
-    }
+
+  svg {
+    width: 18px;
+    height: 18px;
+    margin-right: 5px;
+    position: relative;
+    z-index: -1;
+  }
 `;
 
 export const LinkGoogle = styled.a`
@@ -202,13 +202,13 @@ export const LinkGoogle = styled.a`
 `;
 
 export const FormBtn = styled.button`
-margin: 0; 
- padding :0; 
+  margin: 0;
+  padding: 0;
   border: none;
   width: 116px;
   height: 44px;
   border-radius: 16px;
- 
+
   background: ${theme.colors.lilac.dark};
   color: #52555f;
 

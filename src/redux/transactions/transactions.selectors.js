@@ -54,7 +54,7 @@ export const selectIncomesPeriodByCategory = createSelector(
   }
 );
 
-export const selectExposesPeriodByCategory = createSelector(
+export const selectExpensesPeriodByCategory = createSelector(
   [selectPeriod, getCategoryName],
   (period, categoryName) => {
     const descriptionsList = period.expenses?.data[categoryName]?.list;

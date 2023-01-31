@@ -11,11 +11,13 @@ import {
   selectRefreshToken,
 } from 'redux/auth/auth.selectors';
 import { refreshTokenThunk } from 'redux/auth/auth.thunk';
+import { Box } from './Box/Box.styled';
 
 const HomePage = lazy(() => import('pages/Home'));
 const AuthPage = lazy(() => import('pages/Auth'));
 const Login = lazy(() => import('components/Auth/Login'));
 const Registration = lazy(() => import('components/Auth/Registration'));
+const Expenses = lazy(() => import('components/Expenses'));
 const ReportsPage = () => <h2>Reports</h2>;
 
 export const App = () => {
@@ -32,7 +34,7 @@ export const App = () => {
   }, [dispatch]);
 
   return (
-    <>
+    <Box height="100vh">
       <Routes>
         <Route path={routes.BASE} element={<AppLayout />}>
           <Route index element={<Navigate to={routes.HOME} replace />} />
@@ -43,11 +45,8 @@ export const App = () => {
             }
           >
             <Route index element={<Navigate to={routes.EXPENSES} replace />} />
-            <Route
-              path={routes.EXPENSES}
-              element={<h2>Expenses component</h2>}
-            />
-            <Route path={routes.INCOME} element={<h2>Income element</h2>} />
+            <Route path={routes.EXPENSES} element={<Expenses />} />
+            <Route path={routes.INCOME} element={<>Income element</>} />
           </Route>
           <Route
             path={routes.REPORTS}
@@ -99,6 +98,6 @@ export const App = () => {
         </Route>
       </Routes>
       <AppToastContainer />
-    </>
+    </Box>
   );
 };
