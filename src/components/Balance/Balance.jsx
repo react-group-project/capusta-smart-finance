@@ -1,5 +1,4 @@
 import { Box } from 'components/Box/Box.styled';
-import { Button } from 'components/Common/Button/Button.styled';
 import { useState, useEffect } from 'react';
 import { NumericFormat } from 'react-number-format';
 import { useSelector, useDispatch } from 'react-redux';
