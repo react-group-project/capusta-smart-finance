@@ -30,7 +30,6 @@ export default function Login() {
   const dispatch = useDispatch();
   const clickHandler = e => {
     e.preventDefault();
-
     dispatch(
       loginThunk({
         email,
