@@ -31,11 +31,15 @@ export const getExpenseThunk = createAsyncThunk(
 
       const convertedData = data.expenses.map(item => ({
         ...item,
+        amount: item.amount * -1,
         category: convertExpenseValueToEng(item.category),
       }));
 
       const convertedMonth = Object.keys(data.monthsStats).map(key => {
-        return { ...convertMonthToEng(key), amount: data.monthsStats[key] };
+        return {
+          ...convertMonthToEng(key),
+          amount: data.monthsStats[key],
+        };
       });
 
       return { data: convertedData, monthsStats: convertedMonth };
@@ -79,7 +83,10 @@ export const getIncomeThunk = createAsyncThunk(
         category: convertIncomeValueToEng(item.category),
       }));
       const convertedMonth = Object.keys(data.monthsStats).map(key => {
-        return { ...convertMonthToEng(key), amount: data.monthsStats[key] };
+        return {
+          ...convertMonthToEng(key),
+          amount: data.monthsStats[key],
+        };
       });
 
       return { data: convertedData, monthsStats: convertedMonth };
@@ -129,7 +136,6 @@ export const deleteTransactionThunk = createAsyncThunk(
   }
 );
 
-// QUESTION: 1) Спитати, як викликати цю функцію. Можно лі взагалі не викликати при перемиканнкі income expenses на home page, Тому що при видаленні чи додаванні транзакціі робиться запит на сервер. 2) робити promise.all для dispatch чи для звичаних запиті?
 // Get all transactions
 export const getAllTransactionsThunk = createAsyncThunk(
   'transactions/getAllTransactions',
@@ -180,7 +186,7 @@ export const getExpenseCategoriesThunk = createAsyncThunk(
 
 // Get data for a specified period
 export const getPeriodDataThunk = createAsyncThunk(
-  'transactions/detPeriodData',
+  'transactions/getPeriodData',
   async (body, { rejectWithValue }) => {
     try {
       const data = await getPeriodDataService(body);

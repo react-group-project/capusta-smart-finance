@@ -41,7 +41,7 @@ const transactionsSlice = createSlice({
         isActionRejected(transactionsSlice.name),
         (state, { payload }) => {
           state.status = Status.REJECTED;
-          state.error = payload.message;
+          state.error = payload?.message;
         }
       );
   },

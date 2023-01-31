@@ -35,3 +35,37 @@ export const selectSortedAllTransactionsData = createSelector(
     return orderBy(list, ['date'], ['desc']);
   }
 );
+
+const getCategoryName = (_, categoryName) => categoryName;
+
+export const selectIncomesPeriodByCategory = createSelector(
+  [selectPeriod, getCategoryName],
+  (period, categoryName) => {
+    const descriptionsList = period.incomes?.data[categoryName]?.list;
+
+    return orderBy(descriptionsList, ['amount'], ['desc'])?.reduce(
+      (acc, item) => {
+        acc.labels.push(item.description);
+        acc.data.push(item.amount);
+        return acc;
+      },
+      { labels: [], data: [] }
+    );
+  }
+);
+
+export const selectExpensesPeriodByCategory = createSelector(
+  [selectPeriod, getCategoryName],
+  (period, categoryName) => {
+    const descriptionsList = period.expenses?.data[categoryName]?.list;
+
+    return orderBy(descriptionsList, ['amount'], ['desc'])?.reduce(
+      (acc, item) => {
+        acc.labels.push(item.description);
+        acc.data.push(item.amount);
+        return acc;
+      },
+      { labels: [], data: [] }
+    );
+  }
+);

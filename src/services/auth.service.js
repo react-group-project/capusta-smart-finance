@@ -14,7 +14,15 @@ export const logoutUserService = async () => {
   return privateApi.post('/auth/logout');
 };
 
-export const refreshTokenService = async sid => {
-  const { data } = await privateApi.post('/auth/refresh', { sid });
+export const refreshTokenService = async (refreshToken, sid) => {
+  const { data } = await privateApi.post(
+    '/auth/refresh',
+    { sid },
+    {
+      headers: {
+        Authorization: `Bearer ${refreshToken}`,
+      },
+    }
+  );
   return data;
 };

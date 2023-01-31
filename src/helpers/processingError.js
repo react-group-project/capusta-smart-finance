@@ -1,7 +1,7 @@
 import { errorNotification } from './notification';
 
 export const processingError = (error, isNotificationShow = true) => {
-  const message = error.response.data?.message || 'Bad request';
+  const message = error?.response?.data?.message || 'Bad request';
 
   if (isNotificationShow) errorNotification(message);
 
