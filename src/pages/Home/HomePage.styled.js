@@ -21,7 +21,7 @@ export const ReportsButton = styled(Box)`
   align-items: flex-end;
   gap: 15px;
 
-  color: inherit;
+  color: ${({ theme }) => theme.colors.grey.alpha};
   text-decoration: none;
 
   border: none;
@@ -33,7 +33,7 @@ export const ReportsButton = styled(Box)`
 
   &:hover,
   &:focus {
-    border-bottom-color: ${({ theme }) => theme.colors.grey.dark};
+    border-bottom-color: ${({ theme }) => theme.colors.grey.alpha};
   }
 
   @media (min-width: ${({ theme }) => theme.breakpoints.tablet}) {

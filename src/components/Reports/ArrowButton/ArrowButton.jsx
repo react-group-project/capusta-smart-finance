@@ -1,16 +1,10 @@
 import { Slider, StyledButton } from './ArrowButton.styled';
 import { BackArrow, NextArrow } from '../Arrows/Arrows';
-import { useState } from 'react';
 import { Text } from 'components/Common/Text/Text.styled';
-export default function ArrowButton({ getWages }) {
-  const [value, setValue] = useState('expenses');
-  getWages(value);
+
+export default function ArrowButton({ wages, onChangeWages }) {
   const onChange = () => {
-    if (value === 'expenses') {
-      setValue('incomes');
-    } else {
-      setValue('expenses');
-    }
+    onChangeWages(wages === 'expenses' ? 'incomes' : 'expenses');
   };
 
   return (
@@ -20,7 +14,7 @@ export default function ArrowButton({ getWages }) {
           <BackArrow />
         </StyledButton>
         <Text variant="boldUppercase" mr="16px" ml="16px" mt="2px">
-          {value}
+          {wages}
         </Text>
 
         <StyledButton onClick={onChange}>

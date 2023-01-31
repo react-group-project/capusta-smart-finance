@@ -1,40 +1,33 @@
-import MediaQuery from 'react-responsive';
 import ReportsItem from './ReportsItem/ReportsItem';
 import { List, ReportContainer } from './Reports.styled';
 import ArrowButton from './ArrowButton/ArrowButton';
-export default function Reports({ statCategories, getCategory, getWages }) {
-  const onClickHandler = category => {
-    getCategory(category);
+import { useSelector } from 'react-redux';
+import { selectPeriod } from 'redux/transactions/transactions.selectors';
+
+export default function Reports({ onChangeCategory, onChangeWages, wages }) {
+  const data = useSelector(selectPeriod);
+  const statCategories = Object.entries(data[wages].data);
+
+  const changeCategoryHandler = category => {
+    onChangeCategory(category);
   };
 
   return (
-    <>
-      <MediaQuery maxWidth={767}>
-        {/* <ArrowButton getWages={getWages} /> */}
-        {statCategories && (
-          <List>
-            {statCategories.map((category, index) => (
-              <li key={index} onClick={() => onClickHandler(category)}>
-                <ReportsItem category={category} />
-              </li>
-            ))}
-          </List>
-        )}
-      </MediaQuery>
-      <MediaQuery minWidth={768}>
-        <ReportContainer>
-          <ArrowButton getWages={getWages} />
-          {statCategories && (
-            <List>
-              {statCategories.map((category, index) => (
-                <li key={index} onClick={() => onClickHandler(category)}>
-                  <ReportsItem category={category} />
-                </li>
-              ))}
-            </List>
-          )}
-        </ReportContainer>
-      </MediaQuery>
-    </>
+    <ReportContainer>
+      <ArrowButton onChangeWages={onChangeWages} wages={wages} />
+
+      {statCategories && (
+        <List>
+          {statCategories.map(category => (
+            <li
+              key={category[0]}
+              onClick={() => changeCategoryHandler(category[0])}
+            >
+              <ReportsItem category={category} />
+            </li>
+          ))}
+        </List>
+      )}
+    </ReportContainer>
   );
 }

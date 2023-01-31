@@ -7,6 +7,9 @@ import Balance from 'components/Balance';
 import { routes } from 'constants/routes';
 import { Box } from 'components/Box/Box.styled';
 import { HomeHeader, ReportsButton } from './HomePage.styled';
+import { theme } from 'theme';
+
+const iconColor = theme.colors.grey.dark;
 
 export default function HomePage() {
   const location = useLocation();
@@ -18,7 +21,7 @@ export default function HomePage() {
           <HomeHeader>
             <Balance ml={{ tablet: '0', desktop: 'auto' }} />
             <ReportsButton state={{ from: location }}>
-              Reports <MdBarChart size={20} height="40px" />
+              Reports <MdBarChart color={iconColor} size={20} height="40px" />
             </ReportsButton>
           </HomeHeader>
 

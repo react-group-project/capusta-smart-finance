@@ -15,32 +15,36 @@ import { Text } from 'components/Common/Text/Text.styled';
 import { Category, IconContainer } from './ReportsItem.styled';
 import { convertMoneyToString } from 'helpers';
 
-export default function ReportsItem({ category }) {
-    const categories = {
-        Transport: <Transport />,
-        Health: <Health />,
-        Alcohol: <Alcohol />,
-        Entertainment: <Entertainment />,
-        Products: <Products />,
-        Housing: <Housing />,
-        Technique: <Technique />,
-        'Communal, communication': <Communal />,
-        'Sports, hobbies': <Sports />,
-        Education: <Education />,
-        Other: <Other />,
-        Salary: <Salary />,
-        'Add. income': <AddIncome />,
-    };
+const categories = {
+  Transport: Transport,
+  Health: Health,
+  Alcohol: Alcohol,
+  Entertainment: Entertainment,
+  Products: Products,
+  Housing: Housing,
+  Technique: Technique,
+  'Communal, communication': Communal,
+  'Sports, hobbies': Sports,
+  Education: Education,
+  Other: Other,
+  Salary: Salary,
+  'Add. income': AddIncome,
+};
 
-    return (
-        <>
-            <Category>
-                <Text variant="uppercase" color="grey.dark">
-                    {convertMoneyToString(category[1].total)}
-                </Text>
-                <IconContainer>{categories[category[0]]}</IconContainer>
-                <Text variant="uppercase">{category[0]}</Text>
-            </Category>
-        </>
-    );
+export default function ReportsItem({ category, isActive }) {
+  const Component = categories[category[0]];
+  return (
+    <>
+      <Category>
+        <Text variant="uppercase" color="grey.dark">
+          {convertMoneyToString(category[1].total)}
+        </Text>
+        <IconContainer>
+          {/* {categories[category[0]]} */}
+          {<Component isActive={isActive} />}
+        </IconContainer>
+        <Text variant="uppercase">{category[0]}</Text>
+      </Category>
+    </>
+  );
 }

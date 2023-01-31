@@ -1,16 +1,22 @@
-import MediaQuery from 'react-responsive';
+import { useMediaQuery } from 'react-responsive';
 import Chart from './Chart';
 import MobileChart from './MobileChart';
+import { useSelector } from 'react-redux';
+import { selectPeriodByCategory } from 'redux/transactions/transactions.selectors';
 
-export default function CommonChart({ stats }) {
-    return (
-        <>
-            <MediaQuery maxWidth={767}>
-                <MobileChart stats={stats} />
-            </MediaQuery>
-            <MediaQuery minWidth={768}>
-                <Chart stats={stats} />
-            </MediaQuery>
-        </>
-    );
+export default function CommonChart({ wages, category }) {
+  const isMobile = useMediaQuery({
+    query: '(max-width: 767px)',
+  });
+
+  const data = useSelector(state =>
+    selectPeriodByCategory(state, {
+      categoryName: category,
+      transactionName: wages,
+    })
+  );
+
+  return (
+    <>{isMobile ? <MobileChart stats={data} /> : <Chart stats={data} />}</>
+  );
 }

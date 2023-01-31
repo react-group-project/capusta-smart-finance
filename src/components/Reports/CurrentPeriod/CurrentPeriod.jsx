@@ -4,14 +4,14 @@ import { format, subMonths, addMonths } from 'date-fns';
 import { Text } from 'components/Common/Text/Text.styled';
 import { Box } from 'components/Box/Box.styled';
 
-export default function CurrentPeriod({ date, setDate }) {
+export default function CurrentPeriod({ date, onChangeDate }) {
   const onClickBackHandler = () => {
     const newDate = subMonths(date, 1);
-    setDate(newDate);
+    onChangeDate(newDate);
   };
   const onClickNextHandler = () => {
     const newDate = addMonths(date, 1);
-    setDate(newDate);
+    onChangeDate(newDate);
   };
   return (
     <Box mb={{ _: '32px', tablet: '0' }}>

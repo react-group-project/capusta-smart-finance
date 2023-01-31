@@ -9,6 +9,7 @@ export const IconWrapper = styled.div`
     color: ${({ theme }) => theme.colors.orange.base};
   }
 `;
+
 export const IconBg = styled.div`
   position: relative;
   background-color: ${({ theme }) => theme.colors.blue.light};
