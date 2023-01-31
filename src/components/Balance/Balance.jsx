@@ -4,12 +4,15 @@ import { NumericFormat } from 'react-number-format';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectUserBalance } from 'redux/user/user.selectors';
 import { addUserBalanceThunk } from 'redux/user/user.thunk';
+
 import {
   BalanceConfirmButton,
   BalanceContainer,
   BalanceInput,
   BalanceLabel,
 } from './Balance.styled';
+
+import PopUp from '../../components/PopUp/PopUp'
 
 export default function Balance(props) {
   const dispatch = useDispatch();
@@ -25,7 +28,6 @@ export default function Balance(props) {
       <BalanceLabel as="label" htmlFor="balance">
         Balance:
       </BalanceLabel>
-
       <Box width="100%" display="flex">
         <NumericFormat
           displayType="input"
@@ -49,6 +51,7 @@ export default function Balance(props) {
         >
           Confirm
         </BalanceConfirmButton>
+      <PopUp/>
       </Box>
     </BalanceContainer>
   );

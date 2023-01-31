@@ -22,6 +22,7 @@ import {
   FormBtn,
 } from '.././LogimForm.styled';
 
+
 // import { Button } from '../../Common/Button/Button.styled';
 
 export default function Login() {
@@ -44,6 +45,7 @@ export default function Login() {
   };
   return (
     <>
+   
       <FormStyle>
         <Content>
           <Text>You can log in with your Google Account:</Text>
@@ -100,6 +102,7 @@ export default function Login() {
           </BtnBox>
         </Content>
       </FormStyle>
+
     </>
   );
 }
