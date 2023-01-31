@@ -80,6 +80,11 @@ export const theme = {
     tooltipBackground:
       'linear-gradient(117.84deg, #1D346A 2.84%, #031634 67.28%)',
   },
+  transitions: {
+    create: createTransitions,
+    duration: '250ms',
+    easy: 'cubic-bezier(0.4, 0, 0.2, 1)',
+  },
 };
 
 theme.breakpoints.mobile = theme.breakpoints[0];
@@ -90,3 +95,13 @@ theme.radii.sm = theme.radii[0];
 theme.radii.md = theme.radii[1];
 theme.radii.lg = theme.radii[2];
 theme.radii.xl = theme.radii[3];
+
+function createTransitions(
+  properties = [],
+  duration = '250ms',
+  easing = 'cubic-bezier(0.4, 0, 0.2, 1)'
+) {
+  return properties
+    .map(property => `${property} ${duration} ${easing}`)
+    .join(', ');
+}

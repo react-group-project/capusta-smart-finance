@@ -13,15 +13,15 @@ import { injectStore } from 'services/tokenApi';
 injectStore(store);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <BrowserRouter basename="capusta-smart-finance">
-      <ThemeProvider theme={theme}>
-        <Provider store={store}>
-          <PersistGate loading={null} persistor={persistedStore}>
-            <App />
-          </PersistGate>
-        </Provider>
-      </ThemeProvider>
-    </BrowserRouter>
-  </React.StrictMode>
+  //<React.StrictMode>
+  <BrowserRouter basename="capusta-smart-finance">
+    <ThemeProvider theme={theme}>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistedStore}>
+          <App />
+        </PersistGate>
+      </Provider>
+    </ThemeProvider>
+  </BrowserRouter>
+  //</React.StrictMode>
 );

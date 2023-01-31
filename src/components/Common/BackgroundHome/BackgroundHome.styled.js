@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { layout } from 'styled-system';
 import decorHomeBgDesktop from '../../../images/decorHomeBgDesktop.svg';
 import decorHomeBgTablet from '../../../images/decorHomeBgTablet.svg';
 
@@ -11,7 +12,6 @@ export const BackgroundHome = styled.div`
   /* min-height: calc(
     100vh - 57px
   ); //height 100% встановитти не виходить - прийшлось використовувати (вьюпорт - header); */
-
   @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
     background-image: url(${decorHomeBgTablet});
     background-repeat: no-repeat;
@@ -28,7 +28,9 @@ export const BackgroundHome = styled.div`
     position: absolute;
     content: '';
 
+    top: 0;
     width: 100%;
+    //height: 216px;
     height: 295px;
 
     background-color: ${props => props.theme.colors.blue.light};
@@ -40,4 +42,5 @@ export const BackgroundHome = styled.div`
       height: 526px;
     }
   }
+  ${layout}
 `;
