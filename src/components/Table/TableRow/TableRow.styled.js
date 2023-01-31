@@ -1,6 +1,6 @@
+import { IoTrashOutline } from 'react-icons/io5';
 import styled from 'styled-components';
 import { theme } from 'theme';
-import { IoTrashOutline } from 'react-icons/io5';
 
 export const Icon = styled(IoTrashOutline)`
   width: 15px;
@@ -13,9 +13,14 @@ export const Tr = styled.tr`
 `;
 
 export const Td = styled.td`
-  color: ${props => props.type === 'expenses' && theme.colors.red.base}${props => props.type === 'incomes' && theme.colors.green.base};
-  font-weight: ${props => props.type && theme.fontWeights.bold};
+  color: ${theme.colors.grey.dark};
+  font-weight: ${theme.fontWeights.regular};
   padding: 13px;
+`;
+
+export const ExpenseTd = styled(Td)`
+  color: ${theme.colors.red.base};
+  font-weight: ${theme.fontWeights.bold};
 `;
 
 export const Ttrash = styled(Td)`
