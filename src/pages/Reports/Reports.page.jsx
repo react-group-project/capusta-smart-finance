@@ -10,18 +10,24 @@ import {
   selectExpensesPeriodByCategory,
   selectPeriod,
 } from './../../redux/transactions/transactions.selectors';
-import { FlexContainer } from './Reports.page.styled';
+import { ReportsHeader } from './Reports.page.styled';
 import { format } from 'date-fns';
+import { Box } from 'components/Box/Box.styled';
+import { BackgroundHome } from 'components/Common/BackgroundHome/BackgroundHome.styled';
+import { Container } from 'components/Common/Container/Container.styled';
+import Balance from 'components/Balance';
 
 export default function ReportsPage() {
   const dispatch = useDispatch();
-  const [category, setCategory] = useState('');
+  const [date, setDate] = useState(() => new Date());
   const [wages, setWages] = useState('expenses');
-  const [date, setDate] = useState(new Date());
+
+  const [category, setCategory] = useState('');
 
   useEffect(() => {
     dispatch(getPeriodDataThunk({ date: format(date, 'yyyy-MM') }));
   }, [date, dispatch]);
+
   const getCategory = category => {
     setCategory(category[0]);
   };
@@ -42,18 +48,30 @@ export default function ReportsPage() {
   );
 
   return (
-    <>
-      <FlexContainer>
-        <MainPageButtonArrow />
-        <CurrentPeriod date={date} setDate={setDate} />
-      </FlexContainer>
-      <WagesPanel data={data} />
-      <Reports
-        statCategories={statCategories}
-        getCategory={getCategory}
-        getWages={() => setWages(wages)}
-      />
-      <CommonChart stats={chartData} />
-    </>
+    <Box as="section" height="calc(100% - 57px)">
+      <BackgroundHome>
+        <Box
+          as={Container}
+          position="relative"
+          pt="40px"
+          px={{ _: '20px', tablet: '32px', desktop: '123px' }}
+        >
+          <ReportsHeader>
+            <MainPageButtonArrow />
+            <Balance order={{ _: 2, tablet: 0 }} />
+            <CurrentPeriod date={date} setDate={setDate} />
+          </ReportsHeader>
+
+          <WagesPanel />
+
+          <Reports
+            statCategories={statCategories}
+            getCategory={getCategory}
+            getWages={() => setWages(wages)}
+          />
+          <CommonChart stats={chartData} />
+        </Box>
+      </BackgroundHome>
+    </Box>
   );
 }

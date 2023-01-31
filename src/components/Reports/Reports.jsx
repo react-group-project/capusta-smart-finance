@@ -10,7 +10,7 @@ export default function Reports({ statCategories, getCategory, getWages }) {
   return (
     <>
       <MediaQuery maxWidth={767}>
-        <ArrowButton getWages={getWages} />
+        {/* <ArrowButton getWages={getWages} /> */}
         {statCategories && (
           <List>
             {statCategories.map((category, index) => (
