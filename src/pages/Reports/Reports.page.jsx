@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { format } from 'date-fns';
 import CommonChart from 'components/Chart/CommonChart';
 import Reports from 'components/Reports/Reports';
@@ -12,12 +12,16 @@ import { Box } from 'components/Box/Box.styled';
 import { BackgroundHome } from 'components/Common/BackgroundHome/BackgroundHome.styled';
 import { Container } from 'components/Common/Container/Container.styled';
 import Balance from 'components/Balance';
+import { selectPeriod } from './../../redux/transactions/transactions.selectors';
 
 export default function ReportsPage() {
   const dispatch = useDispatch();
+
   const [date, setDate] = useState(() => new Date());
   const [wages, setWages] = useState('expenses');
-  const [category, setCategory] = useState('');
+  const data = useSelector(selectPeriod);
+  const initialCategory = Object.keys(data?.[wages]?.data)[0];
+  const [category, setCategory] = useState(initialCategory);
 
   useEffect(() => {
     dispatch(getPeriodDataThunk({ date: format(date, 'yyyy-MM') }));

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import {
   Chart as ChartJs,
   CategoryScale,
@@ -6,7 +7,6 @@ import {
   Tooltip,
 } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-import { useRef, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { theme } from 'theme';
 import { MobileChartContainer } from './MobileChart.styled';
@@ -19,7 +19,6 @@ ChartJs.register(
 );
 
 export default function MobileChart({ stats }) {
-  const refContainer = useRef();
   const data = {
     labels: stats?.labels || [],
     // labels: [
@@ -73,8 +72,9 @@ export default function MobileChart({ stats }) {
 
     layout: {
       padding: {
-        top: 30,
+        top: 20,
         right: 70,
+        left: 0,
       },
     },
     scales: {
@@ -130,8 +130,11 @@ export default function MobileChart({ stats }) {
   };
 
   return (
-    <MobileChartContainer ref={refContainer} f={data.labels.length}>
+    <MobileChartContainer initHeight={data.labels.length}>
       <Bar data={data} options={options} />
     </MobileChartContainer>
   );
 }
+MobileChart.propTypes = {
+  stats: PropTypes.object.isRequired,
+};

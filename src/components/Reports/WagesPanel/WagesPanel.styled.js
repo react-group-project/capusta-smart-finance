@@ -16,7 +16,8 @@ export const WagesContainer = styled.div`
   border-radius: ${({ theme }) => theme.radii[2]}px;
   box-shadow: ${({ theme }) => theme.shadows.base};
 
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: calc(${({ theme }) =>
+      theme.breakpoints.tablet} - 1px)) {
     height: 85px;
     padding-top: 20px;
     padding-bottom: 25px;
@@ -53,7 +54,8 @@ export const NegativeSum = styled(Text)`
   }
 `;
 export const MobileContainer = styled.div`
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: calc(${({ theme }) =>
+      theme.breakpoints.tablet} - 1px)) {
     width: 130px;
     text-align: center;
     position: relative;
@@ -64,7 +66,7 @@ export const MobileContainer = styled.div`
         position: absolute;
         height: 70px;
         border: 1px solid ${({ theme }) => theme.colors.grey.light};
-        right: -6px;
+        right: -2px;
         top: -14px;
       }
     }
