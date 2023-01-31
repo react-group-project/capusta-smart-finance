@@ -6,6 +6,7 @@ import {
   Tooltip,
 } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
+import { useRef, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { theme } from 'theme';
 import { MobileChartContainer } from './MobileChart.styled';
@@ -17,30 +18,33 @@ ChartJs.register(
   Tooltip
 );
 
-export default function MobileChart() {
+export default function MobileChart({ stats }) {
+  const refContainer = useRef();
   const data = {
-    labels: [
-      'Pork',
-      'Beef',
-      'Chicken',
-      'Fish',
-      'Coffee',
-      'Olives',
-      'Fruits',
-      'Pork',
-      'Beef',
-      'Chicken',
-      'Fish',
-      'Coffee',
-      'Olives',
-      'Fruits',
-    ],
+    labels: stats?.labels || [],
+    // labels: [
+    //     'Pork',
+    //     'Beef',
+    //     'Chicken',
+    //     'Fish',
+    //     'Coffee',
+    //     'Olives',
+    //     'Fruits',
+    //     'Pork',
+    //     'Beef',
+    //     'Chicken',
+    //     'Fish',
+    //     'Coffee',
+    //     'Olives',
+    //     'Fruits',
+    // ],
     datasets: [
       {
-        data: [
-          5000, 2500, 800, 500, 1000, 1250, 580, 5000, 2500, 800, 500, 1000,
-          1250, 580,
-        ],
+        data: stats?.data || [],
+        // data: [
+        //     5000, 2500, 800, 500, 1000, 1250, 580, 5000, 2500, 800, 500,
+        //     1000, 1250, 580,
+        // ],
 
         backgroundColor: [
           theme.colors.orange.base,
@@ -54,8 +58,9 @@ export default function MobileChart() {
           bottomRight: 10,
         },
 
-        barThickness: 'flex',
-        maxBarThickness: 15,
+        // barThickness: 'flex',
+        // maxBarThickness: 15,
+        barThickness: 15,
       },
     ],
   };
@@ -86,7 +91,8 @@ export default function MobileChart() {
         },
       },
       y: {
-        beginAtZero: true,
+        // beginAtZero: true,
+        // grace: '10%',
         border: {
           display: false,
         },
@@ -95,6 +101,7 @@ export default function MobileChart() {
         },
         ticks: {
           mirror: true,
+          color: theme.colors.grey.dark,
           fontSize: 10,
           lineHeight: 1.2,
           labelOffset: -17,
@@ -108,9 +115,12 @@ export default function MobileChart() {
         align: 'end',
         offset: 10,
         formatter: function (value) {
-          const formattedValue = value.toLocaleString();
-          return formattedValue + ' UAH';
+          if (value) {
+            const formattedValue = value.toLocaleString();
+            return formattedValue + ' UAH';
+          }
         },
+        color: theme.colors.grey.dark,
         font: {
           size: 10,
           lineHeight: 1.2,
@@ -118,8 +128,9 @@ export default function MobileChart() {
       },
     },
   };
+
   return (
-    <MobileChartContainer>
+    <MobileChartContainer ref={refContainer} f={data.labels.length}>
       <Bar data={data} options={options} />
     </MobileChartContainer>
   );

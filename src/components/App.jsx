@@ -1,4 +1,5 @@
 import AppToastContainer from './AppToastContainer';
+
 import { routes } from 'constants/routes';
 import { MobilePage, PrivatePage, RestrictedPage } from 'pages/access';
 import { lazy, useEffect } from 'react';
@@ -17,8 +18,8 @@ const HomePage = lazy(() => import('pages/Home'));
 const AuthPage = lazy(() => import('pages/Auth'));
 const Login = lazy(() => import('components/Auth/Login'));
 const Registration = lazy(() => import('components/Auth/Registration'));
+const ReportsPage = lazy(() => import('pages/Reports/Reports.page'));
 const Expenses = lazy(() => import('components/Expenses'));
-const ReportsPage = () => <h2>Reports</h2>;
 
 export const App = () => {
   const dispatch = useDispatch();

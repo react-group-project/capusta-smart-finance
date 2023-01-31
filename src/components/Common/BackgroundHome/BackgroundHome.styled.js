@@ -8,7 +8,7 @@ export const BackgroundHome = styled.div`
   z-index: 0;
 
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   /* min-height: calc(
     100vh - 57px
   ); //height 100% встановитти не виходить - прийшлось використовувати (вьюпорт - header); */

@@ -48,12 +48,16 @@ export const BalanceLabel = styled(Text)`
     margin-right: 20px;
   }
 
+  color: ${({ theme }) => theme.colors.grey.alpha};
+
   text-transform: none;
 `;
 
 export const BalanceConfirmButton = styled(Button)`
   padding-left: 34px;
   padding-right: 34px;
+
+  color: ${({ theme }) => theme.colors.grey.alpha};
 
   box-shadow: none;
   border: 2px solid ${({ theme }) => theme.colors.white};

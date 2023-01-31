@@ -11,12 +11,12 @@ import {
 } from './Header.styled';
 import ExitButton from './ExitButton';
 import Logo from '../Header/Logo/';
-import ExitPopUp from '../Header/ExitPopUp/';
 import Modal from '../Modal/';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectToken } from 'redux/auth/auth.selectors';
 import { selectUserEmail } from 'redux/user/user.selectors';
 import { logoutThunk } from 'redux/auth/auth.thunk';
+import ModalContent from 'components/Modal/ModalContent/ModalContent';
 
 export default function Header() {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -24,8 +24,8 @@ export default function Header() {
   const userEmail = useSelector(selectUserEmail);
   const dispatch = useDispatch();
 
-  const LogOut = () => {
-    toggleModalVisibility();
+  const logOutHandler = () => {
+    closeModalHandler();
     dispatch(logoutThunk());
   };
 
@@ -34,8 +34,11 @@ export default function Header() {
     return userEmail[0];
   };
 
-  const toggleModalVisibility = () => {
-    setIsModalVisible(!isModalVisible);
+  const openModalHandler = () => {
+    setIsModalVisible(true);
+  };
+  const closeModalHandler = () => {
+    setIsModalVisible(false);
   };
 
   return (
@@ -50,14 +53,15 @@ export default function Header() {
               </UserInitials>
               <UserEmail>{userEmail}</UserEmail>
               <Decorline />
-              <ExitButton onClick={toggleModalVisibility} />
+              <ExitButton onClick={openModalHandler} />
             </UserInfoWrapper>
           )}
           {isModalVisible && (
-            <Modal toggleModalVisibility={toggleModalVisibility}>
-              <ExitPopUp
-                LogOut={LogOut}
-                toggleModalVisibility={toggleModalVisibility}
+            <Modal onClose={closeModalHandler}>
+              <ModalContent
+                message={`Do you really want to leave?`}
+                onClose={closeModalHandler}
+                onClick={logOutHandler}
               />
             </Modal>
           )}

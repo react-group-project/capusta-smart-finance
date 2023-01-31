@@ -6,57 +6,59 @@ import { BackgroundHome } from 'components/Common/BackgroundHome/BackgroundHome.
 import Balance from 'components/Balance';
 import { routes } from 'constants/routes';
 import { Box } from 'components/Box/Box.styled';
-import { HomeHeader, ReportsButton } from './HomePage.styled';
+import {
+  HomeBody,
+  HomeHeader,
+  HomeOutlet,
+  HomeTabButton,
+  HomeTabs,
+  ReportsButton,
+} from './HomePage.styled';
+import { theme } from 'theme';
+import { useMediaQuery } from 'react-responsive';
+
+const iconColor = theme.colors.grey.dark;
 
 export default function HomePage() {
   const location = useLocation();
+  const isMobile = useMediaQuery({
+    query: `(max-width: calc(${theme.breakpoints.tablet} - 1px))`,
+  });
 
   return (
     <Box as="section" height="calc(100% - 57px)">
       <BackgroundHome>
-        <Box as={Container} position="relative" pt="40px">
+        <Box as={Container} position="relative" py="40px">
           <HomeHeader>
             <Balance ml={{ tablet: '0', desktop: 'auto' }} />
             <ReportsButton state={{ from: location }}>
-              Reports <MdBarChart size={20} height="40px" />
+              Reports <MdBarChart color={iconColor} size={20} height="40px" />
             </ReportsButton>
           </HomeHeader>
 
-          <Box
+          <HomeBody
             display="flex"
             flexDirection={{ _: 'column-reverse', tablet: 'column' }}
           >
-            <Box
-              mt={{ tablet: '60px', desktop: '8px' }}
-              position={{ _: 'absolute', tablet: 'static' }}
-              bottom="0"
-              display={{ _: 'flex', tablet: 'block' }}
-              width="calc(100% - 40px)"
-            >
-              <Box
-                as={NavLink}
-                to={routes.EXPENSES_MOBILE}
-                //flexGrow="1"
-                //textAlign="center"
+            <HomeTabs>
+              <HomeTabButton
+                to={isMobile ? routes.EXPENSES_MOBILE : routes.EXPENSES}
               >
                 Expenses
-              </Box>
-              <Box
-                as={NavLink}
-                to={routes.INCOME_MOBILE}
-                //flexGrow="1"
-                //textAlign="center"
+              </HomeTabButton>
+              <HomeTabButton
+                to={isMobile ? routes.INCOME_MOBILE : routes.INCOME}
               >
                 Incomes
-              </Box>
-            </Box>
+              </HomeTabButton>
+            </HomeTabs>
 
-            <Box w="full" mt={{ _: '140px', tablet: '0' }}>
+            <HomeOutlet>
               <Suspense fallback={null}>
                 <Outlet />
               </Suspense>
-            </Box>
-          </Box>
+            </HomeOutlet>
+          </HomeBody>
         </Box>
       </BackgroundHome>
     </Box>

@@ -1,4 +1,6 @@
 import { Box } from 'components/Box/Box.styled';
+import Modal from 'components/Modal';
+import ModalContent from 'components/Modal/ModalContent/ModalContent';
 import { useState, useEffect } from 'react';
 import { NumericFormat } from 'react-number-format';
 import { useSelector, useDispatch } from 'react-redux';
@@ -15,6 +17,22 @@ export default function Balance(props) {
   const dispatch = useDispatch();
   const userBalance = useSelector(selectUserBalance);
   const [balance, setBalance] = useState(userBalance);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const clickHandler = evt => {
+    evt.target.blur();
+
+    setIsModalOpen(true);
+  };
+
+  const closeModalHandler = () => {
+    setIsModalOpen(false);
+  };
+
+  const updateBalanceHandler = () => {
+    dispatch(addUserBalanceThunk(balance));
+    setIsModalOpen(false);
+  };
 
   useEffect(() => {
     setBalance(userBalance);
@@ -41,15 +59,19 @@ export default function Balance(props) {
             setBalance(Number(value));
           }}
         />
-        <BalanceConfirmButton
-          variant="whiteOutline"
-          onClick={() => {
-            dispatch(addUserBalanceThunk(balance));
-          }}
-        >
+        <BalanceConfirmButton variant="whiteOutline" onClick={clickHandler}>
           Confirm
         </BalanceConfirmButton>
       </Box>
+      {isModalOpen && (
+        <Modal onClose={closeModalHandler}>
+          <ModalContent
+            message={`Are you sure you want to change the balance by ${balance} UAH?`}
+            onClose={closeModalHandler}
+            onClick={updateBalanceHandler}
+          />
+        </Modal>
+      )}
     </BalanceContainer>
   );
 }
