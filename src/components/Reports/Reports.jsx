@@ -2,9 +2,10 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import ReportsItem from './ReportsItem/ReportsItem';
-import { List, ReportContainer, NoDataText } from './Reports.styled';
+import { List, ReportContainer } from './Reports.styled';
 import ArrowButton from './ArrowButton/ArrowButton';
 import { selectPeriod } from 'redux/transactions/transactions.selectors';
+import NoFoundData from 'components/NoData/NoData';
 
 export default function Reports({ onChangeCategory, onChangeWages, wages }) {
   const data = useSelector(selectPeriod);
@@ -42,7 +43,7 @@ export default function Reports({ onChangeCategory, onChangeWages, wages }) {
           ))}
         </List>
       ) : (
-        <NoDataText>You have no data for this period</NoDataText>
+        <NoFoundData />
       )}
     </ReportContainer>
   );

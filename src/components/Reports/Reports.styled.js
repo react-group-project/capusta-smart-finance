@@ -29,9 +29,3 @@ export const ReportContainer = styled.div`
     padding: 20px 200px;
   }
 `;
-export const NoDataText = styled.p`
-  font-size: 24px;
-  font-weight: 700;
-  text-align: center;
-  margin-top: 30px;
-`;

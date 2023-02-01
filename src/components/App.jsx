@@ -22,7 +22,7 @@ const Registration = lazy(() => import('components/Auth/Registration'));
 const ReportsPage = lazy(() => import('pages/Reports/Reports.page'));
 const Expenses = lazy(() => import('components/Expenses'));
 const Incomes = lazy(() => import('components/Expenses/Incomes'));
-const NotFoundPage = () => <h2>Not found</h2>;
+const NotFoundPage = lazy(() => import('pages/NotFound/NotFound.page'));
 
 export const App = () => {
   const dispatch = useDispatch();

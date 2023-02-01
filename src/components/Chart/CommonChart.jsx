@@ -18,12 +18,18 @@ export default function CommonChart({ wages, category }) {
     })
   );
 
+  function changeDesctopData(data) {
+    return (data = {
+      labels: ['', ...data.labels, ''],
+      data: [null, ...data.data, null],
+    });
+  }
   return (
     <>
       {isMobile ? (
         <MobileChart stats={data} />
       ) : (
-        <Chart stats={isTablet ? data : data} />
+        <Chart stats={isTablet ? data : changeDesctopData(data)} />
       )}
     </>
   );
