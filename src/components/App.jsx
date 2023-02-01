@@ -22,6 +22,7 @@ const Registration = lazy(() => import('components/Auth/Registration'));
 const ReportsPage = lazy(() => import('pages/Reports/Reports.page'));
 const Expenses = lazy(() => import('components/Expenses'));
 const Incomes = lazy(() => import('components/Expenses/Incomes'));
+const NotFoundPage = () => <h2>Not found</h2>;
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -117,6 +118,7 @@ export const App = () => {
                 />
               }
             />
+            <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>
         <AppToastContainer />
