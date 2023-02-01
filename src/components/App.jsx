@@ -20,8 +20,15 @@ const AuthPage = lazy(() => import('pages/Auth'));
 const Login = lazy(() => import('components/Auth/Login'));
 const Registration = lazy(() => import('components/Auth/Registration'));
 const ReportsPage = lazy(() => import('pages/Reports/Reports.page'));
-const Expenses = lazy(() => import('components/Expenses'));
-const Incomes = lazy(() => import('components/Expenses/Incomes'));
+const Expenses = lazy(() => import('components/transactions/Expenses'));
+const Incomes = lazy(() => import('components/transactions/Incomes'));
+const ExpensesMobile = lazy(() =>
+  import('components/transactions/ExpensesMobile')
+);
+const IncomesMobile = lazy(() =>
+  import('components/transactions/IncomesMobile')
+);
+
 const NotFoundPage = () => <h2>Not found</h2>;
 
 export const App = () => {
@@ -98,7 +105,7 @@ export const App = () => {
                   component={
                     <MobilePage
                       redirect={routes.EXPENSES}
-                      component={<h2>Expenses Mobile form</h2>}
+                      component={<ExpensesMobile />}
                     />
                   }
                 />
@@ -112,7 +119,7 @@ export const App = () => {
                   component={
                     <MobilePage
                       redirect={routes.INCOME}
-                      component={<h2>Income Mobile form</h2>}
+                      component={<IncomesMobile />}
                     />
                   }
                 />
