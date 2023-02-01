@@ -1,6 +1,7 @@
+import PropTypes from 'prop-types';
+import { format, subMonths, addMonths } from 'date-fns';
 import { BackArrow, NextArrow } from '../Arrows/Arrows';
 import { Button, PaleText, FlexContainer } from './CurrentPeriod.styled';
-import { format, subMonths, addMonths } from 'date-fns';
 import { Text } from 'components/Common/Text/Text.styled';
 import { Box } from 'components/Box/Box.styled';
 
@@ -13,6 +14,7 @@ export default function CurrentPeriod({ date, onChangeDate }) {
     const newDate = addMonths(date, 1);
     onChangeDate(newDate);
   };
+
   return (
     <Box mb={{ _: '32px', tablet: '0' }}>
       <PaleText>Current period:</PaleText>
@@ -20,7 +22,7 @@ export default function CurrentPeriod({ date, onChangeDate }) {
         <Button onClick={onClickBackHandler}>
           <BackArrow />
         </Button>
-        <Text variant="boldUppercase" mr="4px" ml="4px" mb="2px">
+        <Text variant="boldUppercase" mb="2px" width="130px" textAlign="center">
           {format(date, 'MMMM yyyy')}
         </Text>
         <Button onClick={onClickNextHandler}>
@@ -30,3 +32,7 @@ export default function CurrentPeriod({ date, onChangeDate }) {
     </Box>
   );
 }
+CurrentPeriod.propTypes = {
+  date: PropTypes.instanceOf(Date).isRequired,
+  onChangeDate: PropTypes.func.isRequired,
+};

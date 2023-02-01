@@ -25,10 +25,11 @@ export const ComponentContainer = styled.div`
   }
 `;
 export const Text = styled.span`
-  @media screen and (max-width: 767px) {
-    display: none;
-  }
   color: ${({ theme }) => theme.colors.grey.alpha};
   margin-left: 16px;
   margin-top: 2px;
+  @media screen and (max-width: calc(${({ theme }) =>
+      theme.breakpoints.tablet} - 1px)) {
+    display: none;
+  }
 `;

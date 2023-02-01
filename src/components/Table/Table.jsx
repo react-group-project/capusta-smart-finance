@@ -6,100 +6,29 @@ import {
   Th,
   TBody,
   TbodyWrapper,
-  TheadWrapper,
   HeadRow,
 } from './Table.styled';
-// import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { selectExpensesData } from 'redux/transactions/transactions.selectors';
 
-export default function Table() {
-  const incomes = [
-    {
-      description: 'Income description',
-      amount: 100,
-      date: '2020-12-31',
-      category: 'Доход',
-      _id: '507f1f77bcf86cd799439011',
-      type: 'expenses',
-    },
-    {
-      description: 'Income description',
-      amount: 100,
-      date: '2020-12-31',
-      category: 'Доход',
-      _id: '507f1f77bcf86cd799439012',
-      type: 'expenses',
-    },
-    {
-      description: 'Income description',
-      amount: 100,
-      date: '2020-12-31',
-      category: 'Доход',
-      _id: '507f1f77bcf86cd799439013',
-      type: 'incomes',
-    },
-    {
-      description: 'Income description',
-      amount: 100,
-      date: '2020-12-31',
-      category: 'Доход',
-      _id: '507f1f77bcf86cd799439014',
-      type: 'expenses',
-    },
-    {
-      description: 'Income description',
-      amount: 100,
-      date: '2020-12-31',
-      category: 'Доход',
-      _id: '507f1f77bcf86cd799439015',
-      type: 'expenses',
-    },
-    {
-      description: 'Income description',
-      amount: 100,
-      date: '2020-12-31',
-      category: 'Доход',
-      _id: '507f1f77bcf86cd799439016',
-      type: 'expenses',
-    },
-    {
-      description: 'Income description',
-      amount: 100,
-      date: '2020-12-31',
-      category: 'Доход',
-      _id: '507f1f77bcf86cd799439017',
-      type: 'expenses',
-    },
-
-    {
-      description: 'Income description',
-      amount: 100,
-      date: '2020-12-31',
-      category: 'Доход',
-      _id: '507f1f77bcf86cd799439018',
-      type: 'expenses',
-    },
-  ];
-
-  //   const incomes = useSelector()
-
+const Table = () => {
+  const expenses = useSelector(selectExpensesData);
   return (
     <TableWrapper>
-      <TheadWrapper>
-        <Thead>
-          <HeadRow>
-            <Th>Date</Th>
-            <Th>Descripton</Th>
-            <Th>Category</Th>
-            <Th>Sum</Th>
-            <Th></Th>
-          </HeadRow>
-        </Thead>
-      </TheadWrapper>
       <TbodyWrapper>
         <StyledTable>
+          <Thead>
+            <HeadRow>
+              <Th>Date</Th>
+              <Th>Descripton</Th>
+              <Th>Category</Th>
+              <Th>Sum</Th>
+              <Th></Th>
+            </HeadRow>
+          </Thead>
           <TBody>
-            {incomes.map(income => {
-              const { date, description, category, amount, _id, type } = income;
+            {expenses.map(expense => {
+              const { date, description, category, amount, _id } = expense;
               return (
                 <TableRow
                   key={_id}
@@ -107,7 +36,7 @@ export default function Table() {
                   description={description}
                   category={category}
                   amount={amount}
-                  type={type}
+                  id={_id}
                 />
               );
             })}
@@ -116,4 +45,5 @@ export default function Table() {
       </TbodyWrapper>
     </TableWrapper>
   );
-}
+};
+export default Table;

@@ -1,7 +1,8 @@
+import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
 import Chart from './Chart';
 import MobileChart from './MobileChart';
-import { useSelector } from 'react-redux';
 import { selectPeriodByCategory } from 'redux/transactions/transactions.selectors';
 
 export default function CommonChart({ wages, category }) {
@@ -20,3 +21,7 @@ export default function CommonChart({ wages, category }) {
     <>{isMobile ? <MobileChart stats={data} /> : <Chart stats={data} />}</>
   );
 }
+CommonChart.propTypes = {
+  wages: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
+};

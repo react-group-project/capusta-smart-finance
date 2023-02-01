@@ -1,5 +1,5 @@
-import { Button, ComponentContainer, Text } from './MainPageButton.styled';
 import { Link, useLocation } from 'react-router-dom';
+import { Button, ComponentContainer, Text } from './MainPageButton.styled';
 import { routes } from 'constants/routes';
 
 export default function MainPageButtonArrow() {

@@ -6,15 +6,14 @@ import { lazy, useEffect } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import AppLayout from './Layouts/AppLayout';
 import { useDispatch, useSelector } from 'react-redux';
+import { AddingExpensessArea } from './AddingExpensessArea/AddingExpensessArea';
 import {
   selectIsAuthorized,
   selectIsRefreshing,
   selectRefreshToken,
 } from 'redux/auth/auth.selectors';
 import { refreshTokenThunk } from 'redux/auth/auth.thunk';
-import { getUserInfoThunk } from 'redux/user/user.thunk';
 import { addToken } from 'redux/auth/auth.slice';
-import { token } from 'services/tokenApi';
 import { Box } from './Box/Box.styled';
 
 const HomePage = lazy(() => import('pages/Home'));
@@ -65,6 +64,8 @@ export const App = () => {
                 index
                 element={<Navigate to={routes.EXPENSES} replace />}
               />
+              {/* <Route path={routes.EXPENSES} element={<AddingExpensessArea />} />
+            <Route path={routes.INCOME} element={<h2>Income element</h2>} /> */}
               <Route path={routes.EXPENSES} element={<Expenses />} />
               <Route path={routes.INCOME} element={<>Income element</>} />
             </Route>
