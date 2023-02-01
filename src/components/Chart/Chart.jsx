@@ -141,5 +141,5 @@ export default function Chart({ stats }) {
   );
 }
 Chart.propTypes = {
-  stats: PropTypes.arrayOf(PropTypes.array),
+  stats: PropTypes.objectOf(PropTypes.array),
 };

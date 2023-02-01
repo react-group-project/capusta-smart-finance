@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import ReportsItem from './ReportsItem/ReportsItem';
 import { List, ReportContainer, NoDataText } from './Reports.styled';
@@ -9,8 +9,15 @@ import { selectPeriod } from 'redux/transactions/transactions.selectors';
 export default function Reports({ onChangeCategory, onChangeWages, wages }) {
   const data = useSelector(selectPeriod);
   const statCategories = Object.entries(data[wages].data);
-  const [activeIcon, setActiveIcon] = useState(statCategories?.[0]?.[0]);
+  const [activeIcon, setActiveIcon] = useState('');
 
+  useEffect(() => {
+    if (statCategories?.[0]?.[0]) {
+      onChangeCategory(statCategories?.[0]?.[0]);
+      setActiveIcon(statCategories?.[0]?.[0]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [wages]);
   const changeCategoryHandler = category => {
     onChangeCategory(category);
     setActiveIcon(category);

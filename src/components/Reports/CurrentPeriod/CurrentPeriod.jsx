@@ -33,6 +33,6 @@ export default function CurrentPeriod({ date, onChangeDate }) {
   );
 }
 CurrentPeriod.propTypes = {
-  date: PropTypes.string.isRequired,
+  date: PropTypes.instanceOf(Date).isRequired,
   onChangeDate: PropTypes.func.isRequired,
 };

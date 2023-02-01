@@ -16,16 +16,16 @@ import { selectPeriod } from './../../redux/transactions/transactions.selectors'
 
 export default function ReportsPage() {
   const dispatch = useDispatch();
-
   const [date, setDate] = useState(() => new Date());
   const [wages, setWages] = useState('expenses');
-  const data = useSelector(selectPeriod);
-  const initialCategory = Object.keys(data?.[wages]?.data)[0];
-  const [category, setCategory] = useState(initialCategory);
+  const [category, setCategory] = useState('');
 
   useEffect(() => {
     dispatch(getPeriodDataThunk({ date: format(date, 'yyyy-MM') }));
   }, [date, dispatch]);
+
+  const data = useSelector(selectPeriod);
+  const showChart = data?.[wages]?.total !== 0;
 
   return (
     <Box as="section" height="calc(100% - 57px)">
@@ -49,7 +49,7 @@ export default function ReportsPage() {
             wages={wages}
             onChangeWages={setWages}
           />
-          <CommonChart wages={wages} category={category} />
+          {showChart && <CommonChart wages={wages} category={category} />}
         </Box>
       </BackgroundHome>
     </Box>

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 export const WagesContainer = styled.div`
+  position: relative;
   display: flex;
   justify-content: center;
 
@@ -24,54 +25,49 @@ export const WagesContainer = styled.div`
     padding-left: 10px;
     padding-right: 10px;
   }
+  ::after {
+    display: block;
+    content: '';
+    position: absolute;
+    height: 70px;
+    border: 1px solid ${({ theme }) => theme.colors.grey.light};
+    right: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    @media screen and (min-width: ${({ theme }) => theme.breakpoints[1]}) {
+      height: 36px;
+    }
+  }
 `;
 
 export const Text = styled.p`
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   font-size: ${({ theme }) => theme.fontSizes[4]};
   @media screen and (min-width: ${({ theme }) => theme.breakpoints[1]}) {
-    margin-right: 15px;
+    margin-right: 20px;
   }
 `;
 export const PositiveSum = styled(Text)`
   color: ${({ theme }) => theme.colors.green.base};
 `;
 export const NegativeSum = styled(Text)`
-  position: relative;
   color: ${({ theme }) => theme.colors.red.base};
   @media screen and (min-width: ${({ theme }) => theme.breakpoints[1]}) {
-    margin-right: 40px;
-    ::after {
-      display: inline-block;
-      content: '';
-      position: absolute;
-
-      border: 1px solid ${({ theme }) => theme.colors.grey.light};
-      height: 36px;
-      right: -20px;
-      top: -10px;
-    }
   }
 `;
 export const MobileContainer = styled.div`
+  width: 50%;
+
   @media screen and (max-width: calc(${({ theme }) =>
       theme.breakpoints.tablet} - 1px)) {
-    width: 130px;
     text-align: center;
-    position: relative;
-    &:not(:last-child) {
-      ::after {
-        display: block;
-        content: '';
-        position: absolute;
-        height: 70px;
-        border: 1px solid ${({ theme }) => theme.colors.grey.light};
-        right: -2px;
-        top: -14px;
-      }
-    }
   }
   @media screen and (min-width: ${({ theme }) => theme.breakpoints[1]}) {
+    width: 50%;
     display: flex;
+    margin-left: 15px;
+    &:not(:last-child) {
+      justify-content: end;
+    }
   }
 `;
