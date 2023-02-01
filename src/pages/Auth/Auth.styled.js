@@ -70,6 +70,9 @@ export const AuthSubTitle = styled(Text)`
 `;
 
 export const AuthOutlet = styled(Box)`
+  width: 100%;
+  max-width: 426px;
+
   margin-top: 50px;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.tablet}) {

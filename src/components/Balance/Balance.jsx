@@ -1,6 +1,7 @@
 import { Box } from 'components/Box/Box.styled';
 import Modal from 'components/Modal';
 import ModalContent from 'components/Modal/ModalContent/ModalContent';
+import { convertMoneyToStringWithCurrency } from 'helpers';
 import { useState, useEffect } from 'react';
 import { NumericFormat } from 'react-number-format';
 import { useSelector, useDispatch } from 'react-redux';
@@ -66,7 +67,9 @@ export default function Balance(props) {
       {isModalOpen && (
         <Modal onClose={closeModalHandler}>
           <ModalContent
-            message={`Are you sure you want to change the balance by ${balance} UAH?`}
+            message={`Are you sure you want to change the balance by ${convertMoneyToStringWithCurrency(
+              balance
+            )}?`}
             onClose={closeModalHandler}
             onClick={updateBalanceHandler}
           />
