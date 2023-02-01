@@ -50,11 +50,13 @@ export default function HomePage() {
             <HomeTabs>
               <HomeTabButton
                 to={isMobile ? routes.EXPENSES_MOBILE : routes.EXPENSES}
+                state={{ from: { pathname: routes.EXPENSES } }}
               >
                 Expenses
               </HomeTabButton>
               <HomeTabButton
                 to={isMobile ? routes.INCOME_MOBILE : routes.INCOME}
+                state={{ from: { pathname: routes.INCOME } }}
               >
                 Incomes
               </HomeTabButton>

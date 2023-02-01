@@ -5,6 +5,7 @@ import { routes } from 'constants/routes';
 export default function MainPageButtonArrow() {
   const location = useLocation();
   const toMain = location.state?.from || routes.HOME;
+  console.log(location);
   return (
     <ComponentContainer>
       <Button as={Link} to={toMain}>
