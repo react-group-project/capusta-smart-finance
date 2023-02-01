@@ -11,6 +11,7 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Bar } from 'react-chartjs-2';
 import { ChartContainer, Container } from './Chart.styled';
 import { theme } from 'theme';
+import { useEffect } from 'react';
 
 ChartJs.register(
   BarElement,
@@ -126,11 +127,13 @@ export default function Chart({ stats }) {
       // },
     },
   };
-
-  data.labels.unshift('');
-  data.labels.push('');
-  data.datasets[0].data.push(null);
-  data.datasets[0].data.unshift(null);
+  useEffect(() => {
+    // console.log('Rerender', data.labels, data.datasets[0].data);
+    // data.labels.unshift('');
+    // data.labels.push('');
+    // data.datasets[0].data.push(null);
+    // data.datasets[0].data.unshift(null);
+  }, []);
 
   return (
     <Container>
@@ -140,6 +143,7 @@ export default function Chart({ stats }) {
     </Container>
   );
 }
+
 Chart.propTypes = {
   stats: PropTypes.objectOf(PropTypes.array),
 };

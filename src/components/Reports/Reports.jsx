@@ -12,12 +12,15 @@ export default function Reports({ onChangeCategory, onChangeWages, wages }) {
   const [activeIcon, setActiveIcon] = useState('');
 
   useEffect(() => {
-    if (statCategories?.[0]?.[0]) {
-      onChangeCategory(statCategories?.[0]?.[0]);
-      setActiveIcon(statCategories?.[0]?.[0]);
+    if (data) {
+      const firstElement = Object.entries(data[wages].data);
+      if (firstElement.length > 0) {
+        onChangeCategory(firstElement[0][0]);
+        setActiveIcon(firstElement[0][0]);
+      }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [wages]);
+  }, [wages, data, onChangeCategory]);
+
   const changeCategoryHandler = category => {
     onChangeCategory(category);
     setActiveIcon(category);

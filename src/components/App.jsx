@@ -6,7 +6,6 @@ import { lazy, useEffect } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import AppLayout from './Layouts/AppLayout';
 import { useDispatch, useSelector } from 'react-redux';
-import { AddingExpensessArea } from './AddingExpensessArea/AddingExpensessArea';
 import {
   selectIsAuthorized,
   selectIsRefreshing,
@@ -22,6 +21,7 @@ const Login = lazy(() => import('components/Auth/Login'));
 const Registration = lazy(() => import('components/Auth/Registration'));
 const ReportsPage = lazy(() => import('pages/Reports/Reports.page'));
 const Expenses = lazy(() => import('components/Expenses'));
+const Incomes = lazy(() => import('components/Expenses/Incomes'));
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -64,10 +64,8 @@ export const App = () => {
                 index
                 element={<Navigate to={routes.EXPENSES} replace />}
               />
-              {/* <Route path={routes.EXPENSES} element={<AddingExpensessArea />} />
-            <Route path={routes.INCOME} element={<h2>Income element</h2>} /> */}
               <Route path={routes.EXPENSES} element={<Expenses />} />
-              <Route path={routes.INCOME} element={<>Income element</>} />
+              <Route path={routes.INCOME} element={<Incomes />} />
             </Route>
             <Route
               path={routes.REPORTS}
