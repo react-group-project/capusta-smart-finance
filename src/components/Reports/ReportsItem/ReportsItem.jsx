@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import AddIncome from 'components/Icons/AddIncome';
 import Alcohol from 'components/Icons/Alcohol';
 import Communal from 'components/Icons/Communal';
@@ -31,7 +32,7 @@ const categories = {
   'Add. income': AddIncome,
 };
 
-export default function ReportsItem({ category, isActive }) {
+export default function ReportsItem({ category, activeIcon }) {
   const Component = categories[category[0]];
   return (
     <>
@@ -40,11 +41,14 @@ export default function ReportsItem({ category, isActive }) {
           {convertMoneyToString(category[1].total)}
         </Text>
         <IconContainer>
-          {/* {categories[category[0]]} */}
-          {<Component isActive={isActive} />}
+          {<Component isActive={activeIcon === category[0]} />}
         </IconContainer>
         <Text variant="uppercase">{category[0]}</Text>
       </Category>
     </>
   );
 }
+ReportsItem.propTypes = {
+  category: PropTypes.array.isRequired,
+  activeIcon: PropTypes.string.isRequired,
+};

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const ChartContainer = styled.div`
-  @media screen and (max-width: 1279px) {
+  @media screen and (max-width: ${props => props.theme.breakpoints[2]}) {
     width: 635px;
     height: 328px;
   }
@@ -10,7 +10,7 @@ export const ChartContainer = styled.div`
   height: 380px;
 `;
 export const Container = styled.div`
-  @media screen and (max-width: 1279px) {
+  @media screen and (max-width: ${props => props.theme.breakpoints[2]}) {
     padding: 20px 35px;
     width: 704px;
   }

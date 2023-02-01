@@ -1,8 +1,8 @@
 import { IconWrapper, IconBg, Svg } from './Icons.styled';
-function Other() {
+function Other({ isActive }) {
   return (
-    <IconWrapper>
-      <IconBg>
+    <IconWrapper isActive={isActive}>
+      <IconBg isActive={isActive}>
         <Svg
           xmlns="http://www.w3.org/2000/svg"
           width="56"
