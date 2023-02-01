@@ -2,11 +2,12 @@ import { Link, useLocation } from 'react-router-dom';
 import { Button, ComponentContainer, Text } from './MainPageButton.styled';
 import { routes } from 'constants/routes';
 
-export default function MainPageButtonArrow() {
+export default function MainPageButtonArrow(props) {
   const location = useLocation();
   const toMain = location.state?.from || routes.HOME;
+
   return (
-    <ComponentContainer>
+    <ComponentContainer {...props}>
       <Button as={Link} to={toMain}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
