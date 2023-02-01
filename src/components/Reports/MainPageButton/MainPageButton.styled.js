@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { position } from 'styled-system';
 
 export const Button = styled.button`
   display: flex;
@@ -23,6 +24,7 @@ export const ComponentContainer = styled.div`
     align-self: flex-start;
     margin-bottom: 16px;
   }
+  ${position}
 `;
 export const Text = styled.span`
   color: ${({ theme }) => theme.colors.grey.alpha};

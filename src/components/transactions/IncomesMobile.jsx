@@ -8,8 +8,8 @@ export default function IncomesMobile() {
   return (
     <Box as="section" height="calc(100% - 57px)">
       <BackgroundHome>
-        <Box as={Container} position="relative" py="40px">
-          <MainPageButtonArrow />
+        <Box as={Container} position="relative" pt="16px">
+          <MainPageButtonArrow position="absolute" />
           <AddingExpensessArea />
         </Box>
       </BackgroundHome>
