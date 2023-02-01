@@ -235,3 +235,9 @@ export const ClearBtn = styled(Button)`
     background-color: transparent;
   }
 `;
+
+export const BtnWrapper = styled.div`
+  @media screen and (min-width: ${theme.breakpoints[1]}) {
+    display: flex;
+  }
+`;

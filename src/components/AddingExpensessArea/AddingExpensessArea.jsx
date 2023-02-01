@@ -17,6 +17,7 @@ import {
   ClearBtn,
   InputWrapper,
   DescrWrapper,
+  BtnWrapper,
 } from './AddingExpensessArea.styled';
 import {
   addExpenseThunk,
@@ -144,12 +145,12 @@ export const AddingExpensessArea = () => {
             />
           </AmountLabel>
         </InputWrapper>
-        <div>
+        <BtnWrapper>
           <SubmitBtn type="submit">Input</SubmitBtn>
           <ClearBtn type="button" onClick={() => reset()}>
             Clear
           </ClearBtn>
-        </div>
+        </BtnWrapper>
       </Form>
     </>
   );
