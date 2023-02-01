@@ -10,29 +10,16 @@ export const TableWrapper = styled.div`
 
 export const TbodyWrapper = styled.div`
   height: 344px;
-
-  overflow-y: auto;
-  scrollbar-gutter: both-edges;
-  &::-webkit-scrollbar {
-    width: 6px;
-  }
-  &::-webkit-scrollbar-track {
-    background-color: ${theme.colors.grey.light};
-  }
-  &::-webkit-scrollbar-thumb {
-    border-radius: 2px;
-    background-color: ${theme.colors.orange.base};
-  }
 `;
 
 export const StyledTable = styled.table`
   width: 100%;
-  border: 2px solid ${theme.colors.grey.light};
+
   border-radius: 10px;
   border-collapse: collapse;
   position: relative;
   text-align: center;
-  font-size: ${theme.fontSizes[2]}px;
+  font-size: ${theme.fontSizes[2]};
 `;
 
 export const TheadWrapper = styled.table`
@@ -46,14 +33,15 @@ export const TheadWrapper = styled.table`
 `;
 
 export const HeadRow = styled.tr`
-  /* &:last-child {
-    width: 108px;
-  } */
+  display: flex;
+  width: 100%;
 `;
 
 export const Thead = styled.thead`
   width: 100%;
-  border-radius: 10px;
+  display: block;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
   background-color: ${theme.colors.grey.light};
 
   text-transform: uppercase;
@@ -61,14 +49,40 @@ export const Thead = styled.thead`
 
 export const Th = styled.th`
   padding: 13px;
-  &:last-child {
-    width: 89px;
-    @media screen and (min-width: ${theme.breakpoints[2]}) {
-      width: 109px;
-    }
+  &:nth-child(1) {
+    width: 20%;
+  }
+  &:nth-child(2) {
+    width: 30%;
+  }
+  &:nth-child(3) {
+    width: 20%;
+  }
+  &:nth-child(4) {
+    width: 20%;
+  }
+  &:nth-child(5) {
+    width: 10%;
   }
 `;
 
 export const TBody = styled.tbody`
-  height: 500px;
+  display: block;
+  width: 100%;
+  height: 348px;
+
+  border: 2px solid ${theme.colors.grey.light};
+
+  overflow-y: auto;
+  scrollbar-gutter: both-edges;
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: ${theme.colors.grey.light};
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background-color: ${theme.colors.orange.base};
+  }
 `;
