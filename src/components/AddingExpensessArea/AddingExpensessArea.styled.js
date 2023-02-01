@@ -1,17 +1,77 @@
 import styled from 'styled-components';
 import DatePicker from 'react-datepicker';
 import { CalculatorIcon } from './calculator';
+
 import { theme } from 'theme';
 
-export const Form = styled.form`
+export const DescrWrapper = styled.div`
+  width: 100%;
   display: flex;
-  height: 44px;
+  flex-direction: column;
+  margin-bottom: 32px;
+  @media screen and (min-width: ${theme.breakpoints[1]}) {
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+
+    margin-bottom: 0;
+  }
+`;
+
+export const Form = styled.form`
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 320px;
+  padding-right: 20px;
+  padding-left: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 60px;
+  @media screen and (min-width: ${theme.breakpoints[2]}) {
+    height: 44px;
+    max-width: 100%;
+
+    flex-direction: row;
+    margin-bottom: 60px;
+  }
 `;
 
 export const DateLabel = styled.label`
   display: flex;
-  gap: 10px;
+
   align-items: center;
+  margin-bottom: 32px;
+  /* margin-right: ; */
+  @media screen and (min-width: ${theme.breakpoints[1]}) {
+    margin-right: 44px;
+    margin-bottom: 0;
+  }
+
+  @media screen and (min-width: ${theme.breakpoints[2]}) {
+    margin-right: 32px;
+  }
+`;
+
+export const InputWrapper = styled.div`
+  width: 100%;
+  margin-bottom: 32px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @media screen and (min-width: ${theme.breakpoints[1]}) {
+    width: 604px;
+    flex-direction: row;
+    height: 44px;
+  }
+  @media screen and (min-width: ${theme.breakpoints[2]}) {
+    width: 694px;
+    margin-bottom: 0;
+    margin-right: 32px;
+  }
 `;
 
 export const StyledDatePicker = styled(DatePicker)`
@@ -30,48 +90,93 @@ export const StyledDatePicker = styled(DatePicker)`
 `;
 
 export const DescritionLabel = styled.label`
-  width: 290px;
+  width: 100%;
+  @media screen and (min-width: ${theme.breakpoints[1]}) {
+    width: 184px;
+  }
+
+  @media screen and (min-width: ${theme.breakpoints[2]}) {
+    width: 290px;
+  }
 `;
 
 export const DescriptionInput = styled.input`
   width: 100%;
-  height: 100%;
-  border: 2px solid ${theme.colors.grey.light};
+  height: 44px;
+  border: 2px solid ${theme.colors.white};
+  border-bottom: none;
   border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
   outline: none;
   padding-left: 19px;
   padding-right: 32px;
+  @media screen and (min-width: ${theme.breakpoints[1]}) {
+    border-color: ${theme.colors.grey.light};
+    border-bottom: 2px solid ${theme.colors.grey.light};
+    border-right: none;
+    border-top-right-radius: 0;
+  }
 `;
 
 export const SelectLabel = styled.label`
-  width: 169px;
-  border: 2px solid ${theme.colors.grey.light};
+  width: 100%;
+  height: 44px;
+  border: 2px solid ${theme.colors.white};
+  border-bottom-right-radius: 16px;
+  padding-right: 4px;
+
+  @media screen and (min-width: ${theme.breakpoints[1]}) {
+    border: 2px solid ${theme.colors.grey.light};
+    width: 186px;
+    border-right: none;
+    border-bottom-right-radius: 0;
+  }
+  @media screen and (min-width: ${theme.breakpoints[2]}) {
+    width: 169px;
+    border-right: none;
+    border-bottom-right-radius: 0;
+  }
 `;
 
 export const SelectInput = styled.input``;
 
 export const AmountLabel = styled.label`
-  width: 120px;
+  width: 185px;
+  height: 44px;
+
   position: relative;
-  margin-right: 32px;
+
+  @media screen and (min-width: ${theme.breakpoints[2]}) {
+    width: 110px;
+    height: 100%;
+  }
+
+  @media screen and (min-width: ${theme.breakpoints[2]}) {
+    width: 120px;
+  }
 `;
 
 export const AmountInput = styled.input`
   width: 100%;
   height: 100%;
 
-  padding-right: 50px;
-  padding-left: 20px;
+  padding-right: 40px;
+  padding-left: 10px;
 
-  border: 2px solid ${theme.colors.grey.light};
-  border-top-right-radius: 16px;
-  border-bottom-right-radius: 16px;
+  border: 2px solid ${theme.colors.white};
+  border-radius: 16px;
   text-align: end;
 
   outline: none;
 
   &::-webkit-inner-spin-button {
     -webkit-appearance: none;
+  }
+
+  @media screen and (min-width: ${theme.breakpoints[1]}) {
+    border-color: ${theme.colors.grey.light};
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
   }
 `;
 
@@ -81,7 +186,7 @@ export const StyledCalculatorIcon = styled(CalculatorIcon)`
 `;
 
 const Button = styled.button`
-  min-width: 136px;
+  min-width: 130px;
   padding: 12px 14px;
 
   border: none;
@@ -96,6 +201,21 @@ const Button = styled.button`
   text-align: center;
   letter-spacing: ${theme.letterSpacings.small};
   text-transform: uppercase;
+
+  box-shadow: 1px 2px 5px rgba(170, 178, 197, 0.4);
+
+  @media screen and (min-width: ${theme.breakpoints[1]}) {
+    min-width: 125px;
+
+    box-shadow: none;
+    &:hover {
+      box-shadow: 1px 2px 5px rgba(170, 178, 197, 0.4);
+    }
+  }
+
+  @media screen and (min-width: ${theme.breakpoints[2]}) {
+    min-width: 136px;
+  }
 `;
 
 export const SubmitBtn = styled(Button)`
@@ -108,6 +228,10 @@ export const SubmitBtn = styled(Button)`
 
 export const ClearBtn = styled(Button)`
   border: 2px solid ${theme.colors.violet.light};
-  background-color: transparent;
+  background-color: ${theme.colors.lilac.base};
   color: ${theme.colors.grey.dark};
+
+  @media screen and (min-width: ${theme.breakpoints[1]}) {
+    background-color: transparent;
+  }
 `;

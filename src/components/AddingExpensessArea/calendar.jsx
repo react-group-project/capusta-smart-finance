@@ -1,6 +1,12 @@
+import styled from 'styled-components';
+
+const Svg = styled.svg`
+  margin-right: 10px;
+`;
+
 export const CalendarIcon = () => {
   return (
-    <svg
+    <Svg
       width="20"
       height="20"
       viewBox="0 0 20 20"
@@ -35,6 +41,6 @@ export const CalendarIcon = () => {
         d="M15.7802 12.5256H13.4681C13.1445 12.5256 12.8822 12.788 12.8822 13.1116V15.5037C12.8822 15.8273 13.1445 16.0897 13.4681 16.0897H15.7802C16.1038 16.0897 16.3661 15.8273 16.3661 15.5037V13.1116C16.3661 12.788 16.1038 12.5256 15.7802 12.5256ZM15.1943 14.9178H14.0541V13.6975H15.1943V14.9178Z"
         fill="#52555F"
       />
-    </svg>
+    </Svg>
   );
 };
