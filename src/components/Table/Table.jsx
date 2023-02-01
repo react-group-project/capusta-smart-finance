@@ -11,9 +11,8 @@ import {
 import { useSelector } from 'react-redux';
 import { selectExpensesData } from 'redux/transactions/transactions.selectors';
 
-export const Table = () => {
+const Table = () => {
   const expenses = useSelector(selectExpensesData);
-
   return (
     <TableWrapper>
       <TbodyWrapper>
@@ -47,3 +46,4 @@ export const Table = () => {
     </TableWrapper>
   );
 };
+export default Table;

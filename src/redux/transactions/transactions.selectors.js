@@ -36,28 +36,13 @@ export const selectSortedAllTransactionsData = createSelector(
   }
 );
 
-const getCategoryName = (_, categoryName) => categoryName;
+const getCategoryName = (_, { categoryName }) => categoryName;
+const getTransactionName = (_, { transactionName }) => transactionName;
 
-export const selectIncomesPeriodByCategory = createSelector(
-  [selectPeriod, getCategoryName],
-  (period, categoryName) => {
-    const descriptionsList = period.incomes?.data[categoryName]?.list;
-
-    return orderBy(descriptionsList, ['amount'], ['desc'])?.reduce(
-      (acc, item) => {
-        acc.labels.push(item.description);
-        acc.data.push(item.amount);
-        return acc;
-      },
-      { labels: [], data: [] }
-    );
-  }
-);
-
-export const selectExposesPeriodByCategory = createSelector(
-  [selectPeriod, getCategoryName],
-  (period, categoryName) => {
-    const descriptionsList = period.expenses?.data[categoryName]?.list;
+export const selectPeriodByCategory = createSelector(
+  [selectPeriod, getCategoryName, getTransactionName],
+  (period, categoryName, transactionName) => {
+    const descriptionsList = period[transactionName]?.data[categoryName]?.list;
 
     return orderBy(descriptionsList, ['amount'], ['desc'])?.reduce(
       (acc, item) => {
