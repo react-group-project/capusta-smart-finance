@@ -32,8 +32,8 @@ export default function Login() {
   } = useForm({
     mode: 'onChange',
     defaultValues: {
-      email: location.state?.userEmail ?? '',
-      password: '',
+      email: location.state?.userEmail ?? 'goit.test4.user@test.com',
+      password: 'qwerty123',
     },
   });
 

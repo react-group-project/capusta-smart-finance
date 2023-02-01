@@ -9,6 +9,7 @@ export default function CommonChart({ wages, category }) {
   const isMobile = useMediaQuery({
     query: '(max-width: 767px)',
   });
+  const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1279 });
 
   const data = useSelector(state =>
     selectPeriodByCategory(state, {
@@ -18,7 +19,13 @@ export default function CommonChart({ wages, category }) {
   );
 
   return (
-    <>{isMobile ? <MobileChart stats={data} /> : <Chart stats={data} />}</>
+    <>
+      {isMobile ? (
+        <MobileChart stats={data} />
+      ) : (
+        <Chart stats={isTablet ? data : data} />
+      )}
+    </>
   );
 }
 CommonChart.propTypes = {

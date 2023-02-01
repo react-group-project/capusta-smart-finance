@@ -7,10 +7,9 @@ import WagesPanel from 'components/Reports/WagesPanel/WagesPanel';
 import MainPageButtonArrow from 'components/Reports/MainPageButton/MainPageButtonArrow';
 import CurrentPeriod from 'components/Reports/CurrentPeriod/CurrentPeriod';
 import { getPeriodDataThunk } from 'redux/transactions/transactions.thunk';
-import { ReportsHeader } from './Reports.page.styled';
+import { ReportContainer, ReportsHeader } from './Reports.page.styled';
 import { Box } from 'components/Box/Box.styled';
 import { BackgroundHome } from 'components/Common/BackgroundHome/BackgroundHome.styled';
-import { Container } from 'components/Common/Container/Container.styled';
 import Balance from 'components/Balance';
 import { selectPeriod } from './../../redux/transactions/transactions.selectors';
 
@@ -30,12 +29,7 @@ export default function ReportsPage() {
   return (
     <Box as="section" height="calc(100% - 57px)">
       <BackgroundHome>
-        <Box
-          as={Container}
-          position="relative"
-          pt="40px"
-          px={{ _: '20px', tablet: '32px', desktop: '123px' }}
-        >
+        <ReportContainer>
           <ReportsHeader>
             <MainPageButtonArrow />
             <Balance order={{ _: 2, tablet: 0 }} />
@@ -50,7 +44,7 @@ export default function ReportsPage() {
             onChangeWages={setWages}
           />
           {showChart && <CommonChart wages={wages} category={category} />}
-        </Box>
+        </ReportContainer>
       </BackgroundHome>
     </Box>
   );

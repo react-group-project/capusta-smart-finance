@@ -1,5 +1,5 @@
-import { Suspense } from 'react';
-import { NavLink, Outlet, useLocation } from 'react-router-dom';
+import { Suspense, useEffect } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
 import { MdBarChart } from 'react-icons/md';
 import { Container } from 'components/Common/Container/Container.styled';
 import { BackgroundHome } from 'components/Common/BackgroundHome/BackgroundHome.styled';
@@ -16,6 +16,8 @@ import {
 } from './HomePage.styled';
 import { theme } from 'theme';
 import { useMediaQuery } from 'react-responsive';
+import { useDispatch } from 'react-redux';
+import { getAllTransactionsThunk } from 'redux/transactions/transactions.thunk';
 
 const iconColor = theme.colors.grey.dark;
 
@@ -24,6 +26,11 @@ export default function HomePage() {
   const isMobile = useMediaQuery({
     query: `(max-width: calc(${theme.breakpoints.tablet} - 1px))`,
   });
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllTransactionsThunk());
+  }, [dispatch]);
 
   return (
     <Box as="section" height="calc(100% - 57px)">

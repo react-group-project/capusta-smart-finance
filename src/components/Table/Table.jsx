@@ -8,11 +8,8 @@ import {
   TbodyWrapper,
   HeadRow,
 } from './Table.styled';
-import { useSelector } from 'react-redux';
-import { selectExpensesData } from 'redux/transactions/transactions.selectors';
 
-const Table = () => {
-  const expenses = useSelector(selectExpensesData);
+const Table = ({ data }) => {
   return (
     <TableWrapper>
       <TbodyWrapper>
@@ -27,7 +24,7 @@ const Table = () => {
             </HeadRow>
           </Thead>
           <TBody>
-            {expenses.map(expense => {
+            {data.map(expense => {
               const { date, description, category, amount, _id } = expense;
               return (
                 <TableRow
