@@ -1,95 +1,122 @@
-import { routes } from 'constants/routes';
-import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { routes } from 'constants/routes';
 import { registrationThunk } from 'redux/auth/auth.thunk';
-import { ReactComponent as GoogleIcon } from "../../../images/google-symbol.svg";
 import {
-  // ErrorText,
-  // ErrorStar,
+  ErrorText,
+  ErrorStar,
   FieldStyle,
   FormStyle,
   InputStyled,
   LabelInput,
-  Text,
-  BtnBox,
-  SubText,
-  Content,
-  LinkGoogle,
-  FormBtn
-} from '.././LogimForm.styled';
+  FormButtonsLayout,
+  FormContent,
+  FormButton,
+} from '../AuthForm';
+import { useForm } from 'react-hook-form';
+import { authValidation } from '../Auth.validation';
 
 export default function Registration() {
-  const [email, setEmail] = useState('goit.test6.user@test.com');
-  const [password, setPassword] = useState('qwerty123');
-  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const clickHandler = () => {
-    dispatch(
-      registrationThunk({
-        email,
-        password,
-      })
-    )
-      .unwrap()
-      .then(() => {
-        navigate(routes.LOGIN, { replace: true });
-      });
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    reset,
+    formState: { isSubmitting, touchedFields, errors },
+  } = useForm({
+    mode: 'onChange',
+    defaultValues: {
+      email: '',
+      password: '',
+      confirmPassword: '',
+    },
+  });
+
+  const loginHandler = async ({ confirmPassword, ...data }) => {
+    try {
+      await dispatch(registrationThunk(data)).unwrap();
+      navigate(routes.LOGIN, { state: { userEmail: data.email } });
+      reset();
+    } catch (err) {}
   };
+
   return (
     <>
-       <FormStyle>
-        <Content>
-          <Text>You can log in with your Google Account:</Text>
-          <LinkGoogle
-              href={`/`}
-          >
-            <GoogleIcon />
-            Google
-          </LinkGoogle>
-          <SubText>
-            Or log in using an email and password, after registering:
-          </SubText>          
+      <FormStyle onSubmit={handleSubmit(loginHandler)}>
+        <FormContent>
           <FieldStyle>
             <LabelInput htmlFor="email">
-              {/* {formik.touched.email && formik.errors.email ? (
-                  <ErrorStar>*</ErrorStar>
-              ) : null} */}
+              {touchedFields.email && errors.email ? (
+                <ErrorStar>*</ErrorStar>
+              ) : null}
               Email:
-            </LabelInput>           
+            </LabelInput>
             <InputStyled
               type="text"
               autoComplete="off"
               placeholder="your@email.com"
-              value={email}
-              onChange={e => {setEmail(e.target.value);}}
+              {...register('email', authValidation.password)}
             />
-              {/* {formik.touched.email && formik.errors.email ? (
-              <ErrorText>{formik.errors.email}</ErrorText>
-            ) : null}             */}
+            {touchedFields.email && errors.email ? (
+              <ErrorText>{errors.email.message}</ErrorText>
+            ) : null}
           </FieldStyle>
           <FieldStyle>
             <LabelInput htmlFor="password">
-              {/* {formik.touched.password && formik.errors.password ? (
+              {touchedFields.password && errors.password ? (
                 <ErrorStar>*</ErrorStar>
-              ) : null} */}
+              ) : null}
               Password:
-            </LabelInput>          
+            </LabelInput>
             <InputStyled
-             type="password"
+              type="password"
               autoComplete="off"
               placeholder="Password"
-          value={password}
-          onChange={e => {
-          setPassword(e.target.value);
-        }}
+              {...register('password', authValidation.password)}
             />
-            </FieldStyle>
-           <BtnBox>
-            <FormBtn onClick={clickHandler}>Log in</FormBtn>
-            <FormBtn onClick={clickHandler}>Registration</FormBtn>
-          </BtnBox>
-        </Content>
+            {touchedFields.password && errors.password ? (
+              <ErrorText>{errors.password.message}</ErrorText>
+            ) : null}
+          </FieldStyle>
+          <FieldStyle>
+            <LabelInput htmlFor="password">
+              {touchedFields.confirmPassword && errors.confirmPassword ? (
+                <ErrorStar>*</ErrorStar>
+              ) : null}
+              Confirm password:
+            </LabelInput>
+            <InputStyled
+              type="password"
+              autoComplete="off"
+              placeholder="Confirm password"
+              {...register('confirmPassword', {
+                validate: value => {
+                  const { password } = getValues();
+                  return password === value || 'Passwords should match!';
+                },
+              })}
+            />
+            {touchedFields.confirmPassword && errors.confirmPassword ? (
+              <ErrorText>{errors.confirmPassword.message}</ErrorText>
+            ) : null}
+          </FieldStyle>
+          <FormButtonsLayout>
+            {isSubmitting ? (
+              <>Loading...</>
+            ) : (
+              <>
+                <FormButton type="button" as={Link} to={routes.LOGIN}>
+                  Log In
+                </FormButton>
+                <FormButton type="submit" isActive={true}>
+                  Registration
+                </FormButton>
+              </>
+            )}
+          </FormButtonsLayout>
+        </FormContent>
       </FormStyle>
     </>
   );

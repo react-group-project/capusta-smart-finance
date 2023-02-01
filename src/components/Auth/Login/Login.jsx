@@ -1,104 +1,114 @@
-import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { Link, useLocation } from 'react-router-dom';
+import { routes } from 'constants/routes';
 import { loginThunk } from 'redux/auth/auth.thunk';
+import { ReactComponent as GoogleIcon } from 'images/google-symbol.svg';
 import {
-  getAllTransactionsThunk,
-  getPeriodDataThunk,
-} from 'redux/transactions/transactions.thunk';
-
-import { ReactComponent as GoogleIcon } from '../../../images/google-symbol.svg';
-import {
-  // ErrorText,
-  // ErrorStar,
+  ErrorText,
+  ErrorStar,
   FieldStyle,
   FormStyle,
   InputStyled,
   LabelInput,
-  Text,
-  BtnBox,
-  SubText,
-  Content,
-  LinkGoogle,
-  FormBtn,
-} from '.././LogimForm.styled';
-
-// import { Button } from '../../Common/Button/Button.styled';
+  FormText,
+  FormButtonsLayout,
+  FormSubText,
+  FormContent,
+  GoogleButton,
+  FormButton,
+} from '../AuthForm';
+import { useForm } from 'react-hook-form';
+import { authValidation } from '../Auth.validation';
 
 export default function Login() {
-  const [email, setEmail] = useState('goit.test6.user@test.com');
-  const [password, setPassword] = useState('qwerty123');
   const dispatch = useDispatch();
-  const clickHandler = e => {
-    e.preventDefault();
-    dispatch(
-      loginThunk({
-        email,
-        password,
-      })
-    )
-      .unwrap()
-      .then(() => {
-        dispatch(getAllTransactionsThunk());
-        dispatch(getPeriodDataThunk({ date: '2023-01' }));
-      });
+  const location = useLocation();
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { isSubmitting, touchedFields, errors },
+  } = useForm({
+    mode: 'onChange',
+    defaultValues: {
+      email: location.state?.userEmail ?? '',
+      password: '',
+    },
+  });
+
+  const loginHandler = async data => {
+    await dispatch(loginThunk(data));
+    reset();
   };
+
   return (
     <>
-      <FormStyle>
-        <Content>
-          <Text>You can log in with your Google Account:</Text>
-          <LinkGoogle href={`/`}>
+      <FormStyle onSubmit={handleSubmit(loginHandler)}>
+        <FormContent>
+          <FormText>You can log in with your Google Account:</FormText>
+          <GoogleButton
+            type="button"
+            onClick={() => {
+              window.location.href =
+                'https://kapusta-backend.goit.global/auth/google';
+            }}
+          >
             <GoogleIcon />
             Google
-          </LinkGoogle>
-          <SubText>
+          </GoogleButton>
+          <FormSubText>
             Or log in using an email and password, after registering:
-          </SubText>
+          </FormSubText>
           <FieldStyle>
             <LabelInput htmlFor="email">
-              {/* {formik.touched.email && formik.errors.email ? (
-                  <ErrorStar>*</ErrorStar>
-              ) : null} */}
+              {touchedFields.email && errors.email ? (
+                <ErrorStar>*</ErrorStar>
+              ) : null}
               Email:
             </LabelInput>
             <InputStyled
               type="text"
               autoComplete="off"
               placeholder="your@email.com"
-              value={email}
-              onChange={e => {
-                setEmail(e.target.value);
-              }}
+              {...register('email', authValidation.password)}
             />
-            {/* {formik.touched.email && formik.errors.email ? (
-              <ErrorText>{formik.errors.email}</ErrorText>
-            ) : null}             */}
+            {touchedFields.email && errors.email ? (
+              <ErrorText>{errors.email.message}</ErrorText>
+            ) : null}
           </FieldStyle>
           <FieldStyle>
             <LabelInput htmlFor="password">
-              {/* {formik.touched.password && formik.errors.password ? (
+              {touchedFields.password && errors.password ? (
                 <ErrorStar>*</ErrorStar>
-              ) : null} */}
+              ) : null}
               Password:
             </LabelInput>
             <InputStyled
               type="password"
               autoComplete="off"
               placeholder="Password"
-              value={password}
-              onChange={e => {
-                setPassword(e.target.value);
-              }}
+              {...register('password', authValidation.password)}
             />
-            {/* {formik.touched.password && formik.errors.password ? (
-              <ErrorText>{formik.errors.password}</ErrorText>
-            ) : null} */}
+            {touchedFields.password && errors.password ? (
+              <ErrorText>{errors.password.message}</ErrorText>
+            ) : null}
           </FieldStyle>
-          <BtnBox>
-            <FormBtn onClick={clickHandler}>Log in</FormBtn>
-            <FormBtn onClick={clickHandler}>Registration</FormBtn>
-          </BtnBox>
-        </Content>
+          <FormButtonsLayout>
+            {isSubmitting ? (
+              <>Loading...</>
+            ) : (
+              <>
+                <FormButton type="submit" isActive={true}>
+                  Log In
+                </FormButton>
+                <FormButton type="button" as={Link} to={routes.REGISTRATION}>
+                  Registration
+                </FormButton>
+              </>
+            )}
+          </FormButtonsLayout>
+        </FormContent>
       </FormStyle>
     </>
   );

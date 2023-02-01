@@ -12,6 +12,14 @@ const isAuthError = action => action?.payload?.status === 401;
 const authSlice = createSlice({
   name: 'auth',
   initialState: authInitialState,
+  reducers: {
+    addToken: (state, { payload }) => {
+      state.accessToken = payload.accessToken;
+      state.refreshToken = payload.refreshToken;
+      state.sid = payload.sid;
+      state.isAuthorized = true;
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(refreshTokenThunk.pending, state => {
@@ -24,6 +32,7 @@ const authSlice = createSlice({
         state.isAuthorized = true;
         state.isRefreshing = false;
       })
+      .addCase(refreshTokenThunk.rejected, () => authInitialState)
       .addCase(loginThunk.fulfilled, (state, { payload }) => {
         state.accessToken = payload.accessToken;
         state.refreshToken = payload.refreshToken;
@@ -58,5 +67,6 @@ const persistConfig = {
   whitelist: ['refreshToken', 'sid'],
 };
 
+export const { addToken } = authSlice.actions;
 export const authReducer = authSlice.reducer;
 export const persistedAuthReducer = persistReducer(persistConfig, authReducer);
