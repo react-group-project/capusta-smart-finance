@@ -26,8 +26,16 @@ export const Button = styled.button`
 `;
 
 export const List = styled.ul`
+  width: 100%;
+
   padding: 0;
-  margin: 0;
+
+  margin-right: auto;
+  margin-left: auto;
+`;
+
+export const DescrWrapper = styled.div`
+  margin-right: 10px;
 `;
 
 export const Descr = styled.h4`
@@ -59,8 +67,6 @@ export const Emout = styled(Content)`
 `;
 
 export const Item = styled.li`
-  width: 282px;
-
   display: flex;
   justify-content: space-between;
 

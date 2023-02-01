@@ -16,7 +16,7 @@ export default function Expenses() {
   return (
     <Box>
       {isMobile ? (
-        <MobTable />
+        <MobTable data={data} />
       ) : (
         <>
           <AddingExpensessArea />

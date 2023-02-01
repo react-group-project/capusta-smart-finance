@@ -10,7 +10,7 @@ export const Summary = () => {
       <ListHead>Summary</ListHead>
 
       <List>
-        {stats.map(stat => (
+        {stats.slice(0, 6).map(stat => (
           <Item key={stat.id}>
             <p>{stat.month}</p>
             <p>{stat.amount === 'N/A' ? '0,00' : stat.amount}</p>

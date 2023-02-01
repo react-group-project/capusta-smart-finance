@@ -53,13 +53,11 @@ export const AddingExpensessArea = () => {
   });
 
   const onSubmit = e => {
-    console.log(e);
     const data = {
       ...e,
       category: e.category.label,
       date: format(e.date, 'yyyy-MM-dd'),
     };
-    console.log(data);
     dispatch(addExpenseThunk(data));
     reset();
   };
@@ -122,6 +120,7 @@ export const AddingExpensessArea = () => {
                         ...baseStyles,
                         border: 'none',
                         outline: 'none',
+                        backgroundColor: 'transparent',
                       }),
                     }}
                     classNames={{
