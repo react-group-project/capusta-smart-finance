@@ -1,5 +1,4 @@
 import AppToastContainer from './AppToastContainer';
-
 import { routes } from 'constants/routes';
 import { MobilePage, PrivatePage, RestrictedPage } from 'pages/access';
 import { lazy, useEffect } from 'react';
@@ -20,6 +19,7 @@ const AuthPage = lazy(() => import('pages/Auth'));
 const Login = lazy(() => import('components/Auth/Login'));
 const Registration = lazy(() => import('components/Auth/Registration'));
 const ReportsPage = lazy(() => import('pages/Reports/Reports.page'));
+const NotFoundPage = lazy(() => import('pages/NotFound/NotFound.page'));
 const Expenses = lazy(() => import('components/transactions/Expenses'));
 const Incomes = lazy(() => import('components/transactions/Incomes'));
 const ExpensesMobile = lazy(() =>
@@ -28,8 +28,6 @@ const ExpensesMobile = lazy(() =>
 const IncomesMobile = lazy(() =>
   import('components/transactions/IncomesMobile')
 );
-
-const NotFoundPage = () => <h2>Not found</h2>;
 
 export const App = () => {
   const dispatch = useDispatch();
