@@ -25,7 +25,7 @@ function getLastMonths(stats, monthQuantity = 6) {
   return newStats;
 }
 
-export const Summary = ({ stats }) => {
+export default function Summary({ stats }) {
   return (
     <Wrapper>
       <ListHead>Summary</ListHead>
@@ -40,4 +40,4 @@ export const Summary = ({ stats }) => {
       </List>
     </Wrapper>
   );
-};
+}

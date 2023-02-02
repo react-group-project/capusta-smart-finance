@@ -15,7 +15,7 @@ import {
 } from './MobTable.styled';
 import { selectSortedAllTransactionsData } from 'redux/transactions/transactions.selectors';
 
-export const MobTable = () => {
+export default function MobTable() {
   const dispatch = useDispatch();
   const data = useSelector(selectSortedAllTransactionsData);
 
@@ -45,4 +45,4 @@ export const MobTable = () => {
       })}
     </List>
   );
-};
+}

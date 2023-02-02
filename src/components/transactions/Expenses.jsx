@@ -1,16 +1,20 @@
-import Table from 'components/Table';
-import { Box } from 'components/Box/Box.styled';
-import { useMediaQuery } from 'react-responsive';
-import { theme } from 'theme';
-import { MobTable } from 'components/MobTable/MobTable';
-import { AddingExpensessArea } from 'components/AddingExpensessArea/AddingExpensessArea';
 import { useSelector } from 'react-redux';
+import { useMediaQuery } from 'react-responsive';
 import {
   selectExpensesData,
   selectExpensesSortedLastSixMonths,
 } from 'redux/transactions/transactions.selectors';
-import { Summary } from 'components/Summary/Summary';
+import { addExpenseThunk } from 'redux/transactions/transactions.thunk';
+import { Box } from 'components/Box/Box.styled';
+
+import { AddingExpensessArea } from 'components/AddingExpensessArea/AddingExpensessArea';
+import Table from 'components/Table';
+
 import { TransactionsDataWrapper } from './Transactions.styled';
+import { theme } from 'theme';
+import MobTable from 'components/MobTable';
+import Summary from 'components/Summary';
+import { selectExpensesCategories } from '../../redux/transactions/transactions.selectors';
 
 export default function Expenses() {
   const isMobile = useMediaQuery({
@@ -18,6 +22,7 @@ export default function Expenses() {
   });
   const data = useSelector(selectExpensesData);
   const stats = useSelector(selectExpensesSortedLastSixMonths);
+  const categories = useSelector(selectExpensesCategories);
 
   return (
     <Box>
@@ -25,7 +30,10 @@ export default function Expenses() {
         <MobTable />
       ) : (
         <>
-          <AddingExpensessArea />
+          <AddingExpensessArea
+            categories={categories}
+            addFunction={addExpenseThunk}
+          />
           <TransactionsDataWrapper>
             <Table data={data} />
             {!isMobile && <Summary stats={stats} />}

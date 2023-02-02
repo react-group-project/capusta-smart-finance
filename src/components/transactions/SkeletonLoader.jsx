@@ -2,10 +2,12 @@ import Table from 'components/Table';
 import { Box } from 'components/Box/Box.styled';
 import { useMediaQuery } from 'react-responsive';
 import { theme } from 'theme';
-import { MobTable } from 'components/MobTable/MobTable';
+
 import { AddingExpensessArea } from 'components/AddingExpensessArea/AddingExpensessArea';
-import { Summary } from 'components/Summary/Summary';
+
 import { TransactionsDataWrapper } from './Transactions.styled';
+import MobTable from 'components/MobTable';
+import Summary from 'components/Summary';
 
 export default function SkeletonLoader() {
   const isMobile = useMediaQuery({
@@ -18,7 +20,7 @@ export default function SkeletonLoader() {
         <MobTable />
       ) : (
         <>
-          <AddingExpensessArea />
+          <AddingExpensessArea categories={[]} addFunction={() => {}} />
           <TransactionsDataWrapper>
             <Table data={[]} />
             {!isMobile && <Summary stats={[]} />}
