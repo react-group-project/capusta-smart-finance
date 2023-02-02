@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { routes } from 'constants/routes';
 import { loginThunk } from 'redux/auth/auth.thunk';
 import { ReactComponent as GoogleIcon } from 'images/google-symbol.svg';
@@ -16,7 +16,7 @@ import {
   FormContent,
   GoogleButton,
   FormButton,
-} from '../AuthForm';
+} from '../AuthForm.styled';
 import { useForm } from 'react-hook-form';
 import { authValidation } from '../Auth.validation';
 import { selectLoginStatus } from 'redux/auth/auth.selectors';
@@ -26,7 +26,6 @@ import AppSpinner from 'components/Spinner/AppSpinner';
 export default function Login() {
   const dispatch = useDispatch();
   const loginStatus = useSelector(selectLoginStatus);
-  const location = useLocation();
 
   const {
     register,
@@ -36,8 +35,8 @@ export default function Login() {
   } = useForm({
     mode: 'onChange',
     defaultValues: {
-      email: location.state?.userEmail ?? 'goit.test4.user@test.com',
-      password: 'qwerty123',
+      email: '',
+      password: '',
     },
   });
 
