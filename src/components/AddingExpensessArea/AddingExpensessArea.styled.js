@@ -22,14 +22,16 @@ export const DescrWrapper = styled.div`
 export const Form = styled.form`
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 60px;
+
   max-width: 320px;
-  padding-right: 20px;
-  padding-left: 20px;
-  text-align: center;
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 60px;
+
+  text-align: center;
+
   @media screen and (min-width: ${theme.breakpoints[2]}) {
     height: 44px;
     max-width: 100%;
@@ -57,18 +59,19 @@ export const DateLabel = styled.label`
 
 export const InputWrapper = styled.div`
   width: 100%;
-  margin-bottom: 32px;
+  margin-bottom: 80px;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   @media screen and (min-width: ${theme.breakpoints[1]}) {
+    margin-bottom: 32px;
     width: 604px;
-    flex-direction: row;
     height: 44px;
+    flex-direction: row;
   }
   @media screen and (min-width: ${theme.breakpoints[2]}) {
-    width: 694px;
+    width: 714px;
     margin-bottom: 0;
     margin-right: 32px;
   }
@@ -81,6 +84,7 @@ export const StyledDatePicker = styled(DatePicker)`
 
   width: 74px;
 
+  background-color: transparent;
   font-weight: ${theme.fontWeights.black};
   font-size: ${theme.fontSizes[2]};
   line-height: ${theme.lineHeights.base};
@@ -103,13 +107,18 @@ export const DescritionLabel = styled.label`
 export const DescriptionInput = styled.input`
   width: 100%;
   height: 44px;
+
   border: 2px solid ${theme.colors.white};
   border-bottom: none;
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
   outline: none;
+
   padding-left: 19px;
   padding-right: 32px;
+
+  background-color: transparent;
+
   @media screen and (min-width: ${theme.breakpoints[1]}) {
     border-color: ${theme.colors.grey.light};
     border-bottom: 2px solid ${theme.colors.grey.light};
@@ -121,8 +130,10 @@ export const DescriptionInput = styled.input`
 export const SelectLabel = styled.label`
   width: 100%;
   height: 44px;
+
   border: 2px solid ${theme.colors.white};
   border-bottom-right-radius: 16px;
+
   padding-right: 4px;
 
   @media screen and (min-width: ${theme.breakpoints[1]}) {
@@ -146,7 +157,7 @@ export const AmountLabel = styled.label`
 
   position: relative;
 
-  @media screen and (min-width: ${theme.breakpoints[2]}) {
+  @media screen and (min-width: ${theme.breakpoints[1]}) {
     width: 110px;
     height: 100%;
   }
@@ -160,20 +171,23 @@ export const AmountInput = styled.input`
   width: 100%;
   height: 100%;
 
-  padding-right: 40px;
+  padding-right: 60px;
   padding-left: 10px;
 
   border: 2px solid ${theme.colors.white};
   border-radius: 16px;
-  text-align: end;
-
   outline: none;
+  background-color: transparent;
+
+  text-align: end;
 
   &::-webkit-inner-spin-button {
     -webkit-appearance: none;
   }
 
   @media screen and (min-width: ${theme.breakpoints[1]}) {
+    padding-right: 40px;
+
     border-color: ${theme.colors.grey.light};
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
@@ -219,7 +233,7 @@ const Button = styled.button`
 `;
 
 export const SubmitBtn = styled(Button)`
-  margin-right: 16px;
+  /* margin-right: 16px; */
 
   background-color: ${theme.colors.orange.base};
 
@@ -233,5 +247,15 @@ export const ClearBtn = styled(Button)`
 
   @media screen and (min-width: ${theme.breakpoints[1]}) {
     background-color: transparent;
+  }
+`;
+
+export const BtnWrapper = styled.div`
+  display: flex;
+  gap: 20px;
+
+  @media screen and (min-width: ${theme.breakpoints[1]}) {
+    display: flex;
+    gap: 16px;
   }
 `;

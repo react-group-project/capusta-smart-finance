@@ -17,6 +17,7 @@ import {
   ClearBtn,
   InputWrapper,
   DescrWrapper,
+  BtnWrapper,
 } from './AddingExpensessArea.styled';
 import {
   addExpenseThunk,
@@ -52,13 +53,11 @@ export const AddingExpensessArea = () => {
   });
 
   const onSubmit = e => {
-    console.log(e);
     const data = {
       ...e,
       category: e.category.label,
       date: format(e.date, 'yyyy-MM-dd'),
     };
-    console.log(data);
     dispatch(addExpenseThunk(data));
     reset();
   };
@@ -121,6 +120,7 @@ export const AddingExpensessArea = () => {
                         ...baseStyles,
                         border: 'none',
                         outline: 'none',
+                        backgroundColor: 'transparent',
                       }),
                     }}
                     classNames={{
@@ -144,12 +144,12 @@ export const AddingExpensessArea = () => {
             />
           </AmountLabel>
         </InputWrapper>
-        <div>
+        <BtnWrapper>
           <SubmitBtn type="submit">Input</SubmitBtn>
           <ClearBtn type="button" onClick={() => reset()}>
             Clear
           </ClearBtn>
-        </div>
+        </BtnWrapper>
       </Form>
     </>
   );

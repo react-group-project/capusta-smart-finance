@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { Tr, Td, Button, Icon, Ttrash, ExpenseTd } from './TableRow.styled';
 import { deleteTransactionThunk } from 'redux/transactions/transactions.thunk';
+import { convertMoneyToStringWithCurrency } from 'helpers';
 
 export const TableRow = ({ date, description, category, amount, id }) => {
   const dispatch = useDispatch();
@@ -10,7 +11,7 @@ export const TableRow = ({ date, description, category, amount, id }) => {
       <Td>{date}</Td>
       <Td>{description}</Td>
       <Td>{category}</Td>
-      <ExpenseTd>{amount}</ExpenseTd>
+      <ExpenseTd>{convertMoneyToStringWithCurrency(amount)}</ExpenseTd>
       <Ttrash trash>
         <Button
           type="button"

@@ -48,17 +48,31 @@ export const Thead = styled.thead`
 `;
 
 export const Th = styled.th`
-  padding: 13px;
+  padding: 10px;
+
+  display: flex;
+  align-items: center;
   &:nth-child(1) {
     width: 20%;
+    padding-left: 20px;
+
+    @media screen and (min-width: ${theme.breakpoints[2]}) {
+      padding-left: 28px;
+    }
   }
   &:nth-child(2) {
     width: 30%;
+
+    @media screen and (min-width: ${theme.breakpoints[2]}) {
+      padding-left: 20px;
+    }
   }
   &:nth-child(3) {
+    justify-content: center;
     width: 20%;
   }
   &:nth-child(4) {
+    justify-content: center;
     width: 20%;
   }
   &:nth-child(5) {

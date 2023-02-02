@@ -19,24 +19,28 @@ export const Tr = styled.tr`
 export const Td = styled.td`
   color: ${theme.colors.grey.dark};
   font-weight: ${theme.fontWeights.regular};
-  padding: 13px;
+
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
 
   &:nth-child(1) {
     width: 20%;
-    text-align: start;
   }
   &:nth-child(2) {
     width: 30%;
-    text-align: start;
   }
   &:nth-child(3) {
+    justify-content: center;
     width: 20%;
   }
   &:nth-child(4) {
     width: 20%;
+    justify-content: center;
   }
   &:nth-child(5) {
     width: 10%;
+    justify-content: center;
   }
 `;
 
