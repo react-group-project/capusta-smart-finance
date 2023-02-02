@@ -11,20 +11,26 @@ import { ReportContainer, ReportsHeader } from './Reports.page.styled';
 import { Box } from 'components/Box/Box.styled';
 import { BackgroundHome } from 'components/Common/BackgroundHome/BackgroundHome.styled';
 import Balance from 'components/Balance';
-import { selectPeriod } from './../../redux/transactions/transactions.selectors';
+import {
+  selectGetPeriodStatus,
+  selectPeriod,
+} from 'redux/transactions/transactions.selectors';
+import { Status } from 'constants';
 
 export default function ReportsPage() {
   const dispatch = useDispatch();
   const [date, setDate] = useState(() => new Date());
   const [wages, setWages] = useState('expenses');
   const [category, setCategory] = useState('');
+  const periodStatus = useSelector(selectGetPeriodStatus);
 
   useEffect(() => {
     dispatch(getPeriodDataThunk({ date: format(date, 'yyyy-MM') }));
   }, [date, dispatch]);
 
   const data = useSelector(selectPeriod);
-  const showChart = data?.[wages]?.total !== 0;
+  const showChart =
+    data?.[wages]?.total !== 0 && periodStatus !== Status.PENDING;
 
   return (
     <Box as="section" height="calc(100% - 57px)">
