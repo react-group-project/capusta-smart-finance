@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import DatePicker from 'react-datepicker';
 import { CalculatorIcon } from './calculator';
-import { ErrorText } from 'components/Auth/AuthForm';
+import { ErrorText } from 'components/Auth/AuthForm.styled';
 
 import { theme } from 'theme';
 
@@ -256,7 +256,7 @@ export const BtnWrapper = styled.div`
   display: flex;
   gap: 20px;
 
-  @media screen and (min-width: ${theme.breakpoints[1]}) {
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints[1]}) {
     display: flex;
     gap: 16px;
   }
