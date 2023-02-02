@@ -50,6 +50,7 @@ export const AddingExpensessArea = ({ categories, addFunction }) => {
     dispatch(
       addFunction({
         ...data,
+        amount: Number(data.amount),
         category: data.category.label,
         date: format(data.date, 'yyyy-MM-dd'),
       })

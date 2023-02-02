@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import DatePicker from 'react-datepicker';
 import { CalculatorIcon } from './calculator';
-import { ErrorText } from 'components/Auth/AuthForm';
+import { ErrorText } from 'components/Auth/AuthForm.styled';
 
 import { theme } from 'theme';
 

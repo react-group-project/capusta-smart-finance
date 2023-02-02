@@ -17,6 +17,7 @@ export const AuthContainer = styled(Container)`
   }
 
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -52,6 +53,8 @@ export const AuthTitle = styled(Text)`
   }
 
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    /* position: absolute;
+    top: 0; */
     font-size: 102px;
   }
 `;

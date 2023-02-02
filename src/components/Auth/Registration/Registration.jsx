@@ -12,7 +12,7 @@ import {
   FormButtonsLayout,
   FormContent,
   FormButton,
-} from '../AuthForm';
+} from '../AuthForm.styled';
 import { useForm } from 'react-hook-form';
 import { authValidation } from '../Auth.validation';
 import {
