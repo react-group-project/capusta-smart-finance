@@ -38,7 +38,7 @@ export const AddingExpensessArea = ({ categories, addFunction }) => {
     },
   });
 
-  const options = categories.map(category => {
+  const options = categories?.map(category => {
     return { value: category.toLowerCase(), label: category };
   });
 

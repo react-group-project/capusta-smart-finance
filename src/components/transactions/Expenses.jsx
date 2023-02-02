@@ -1,44 +1,43 @@
-import Table from 'components/Table';
-import { Box } from 'components/Box/Box.styled';
+import { useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
-import { theme } from 'theme';
-import { MobTable } from 'components/MobTable/MobTable';
-import { AddingExpensessArea } from 'components/AddingExpensessArea/AddingExpensessArea';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectExpensesData } from 'redux/transactions/transactions.selectors';
 import {
-  addExpenseThunk,
-  getExpenseCategoriesThunk,
-} from 'redux/transactions/transactions.thunk';
-import { useEffect, useState } from 'react';
+  selectExpensesData,
+  selectExpensesSortedLastSixMonths,
+} from 'redux/transactions/transactions.selectors';
+import { addExpenseThunk } from 'redux/transactions/transactions.thunk';
+import { Box } from 'components/Box/Box.styled';
+
+import { AddingExpensessArea } from 'components/AddingExpensessArea/AddingExpensessArea';
+import Table from 'components/Table';
+
+import { TransactionsDataWrapper } from './Transactions.styled';
+import { theme } from 'theme';
+import MobTable from 'components/MobTable';
+import Summary from 'components/Summary';
+import { selectExpensesCategories } from '../../redux/transactions/transactions.selectors';
 
 export default function Expenses() {
   const isMobile = useMediaQuery({
     query: `(max-width: calc(${theme.breakpoints[1]} - 1px))`,
   });
   const data = useSelector(selectExpensesData);
-
-  const [expensesCategories, setExpensesCategories] = useState([]);
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getExpenseCategoriesThunk()).then(data => {
-      setExpensesCategories(data.payload);
-    });
-  }, [dispatch]);
+  const stats = useSelector(selectExpensesSortedLastSixMonths);
+  const categories = useSelector(selectExpensesCategories);
 
   return (
     <Box>
       {isMobile ? (
-        <MobTable data={data} />
+        <MobTable />
       ) : (
         <>
           <AddingExpensessArea
-            categories={expensesCategories}
+            categories={categories}
             addFunction={addExpenseThunk}
           />
-          <Table data={data} />
+          <TransactionsDataWrapper>
+            <Table data={data} />
+            {!isMobile && <Summary stats={stats} />}
+          </TransactionsDataWrapper>
         </>
       )}
     </Box>

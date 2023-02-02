@@ -17,7 +17,12 @@ import {
 import { theme } from 'theme';
 import { useMediaQuery } from 'react-responsive';
 import { useDispatch } from 'react-redux';
-import { getAllTransactionsThunk } from 'redux/transactions/transactions.thunk';
+import {
+  getAllTransactionsThunk,
+  getExpensesCategoriesThunk,
+  getIncomesCategoriesThunk,
+} from 'redux/transactions/transactions.thunk';
+import SkeletonLoader from 'components/transactions/SkeletonLoader';
 
 const iconColor = theme.colors.grey.dark;
 
@@ -30,6 +35,8 @@ export default function HomePage() {
 
   useEffect(() => {
     dispatch(getAllTransactionsThunk());
+    dispatch(getExpensesCategoriesThunk());
+    dispatch(getIncomesCategoriesThunk());
   }, [dispatch]);
 
   return (
@@ -63,7 +70,7 @@ export default function HomePage() {
             </HomeTabs>
 
             <HomeOutlet>
-              <Suspense fallback={null}>
+              <Suspense fallback={<SkeletonLoader />}>
                 <Outlet />
               </Suspense>
             </HomeOutlet>

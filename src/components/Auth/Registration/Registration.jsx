@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { routes } from 'constants/routes';
-import { registrationThunk } from 'redux/auth/auth.thunk';
+import { loginThunk, registrationThunk } from 'redux/auth/auth.thunk';
 import {
   ErrorText,
   ErrorStar,
@@ -18,7 +18,7 @@ import { authValidation } from '../Auth.validation';
 
 export default function Registration() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -37,7 +37,7 @@ export default function Registration() {
   const loginHandler = async ({ confirmPassword, ...data }) => {
     try {
       await dispatch(registrationThunk(data)).unwrap();
-      navigate(routes.LOGIN, { state: { userEmail: data.email } });
+      await dispatch(loginThunk(data)).unwrap();
       reset();
     } catch (err) {}
   };

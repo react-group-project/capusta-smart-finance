@@ -4,10 +4,12 @@ export const transactionsInitialState = {
   incomes: {
     data: [],
     monthsStats: [],
+    categories: [],
   },
   expenses: {
     data: [],
     monthsStats: [],
+    categories: [],
   },
   period: {
     incomes: {

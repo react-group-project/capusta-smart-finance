@@ -9,7 +9,7 @@ export const TableWrapper = styled.div`
 `;
 
 export const TbodyWrapper = styled.div`
-  height: 344px;
+  //height: 344px;
 `;
 
 export const StyledTable = styled.table`

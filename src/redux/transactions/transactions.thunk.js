@@ -156,7 +156,7 @@ export const getAllTransactionsThunk = createAsyncThunk(
 );
 
 // Get income category in eng
-export const getIncomeCategoriesThunk = createAsyncThunk(
+export const getIncomesCategoriesThunk = createAsyncThunk(
   'transactions/getIncomeCategories',
   async (_, { rejectWithValue }) => {
     try {
@@ -171,7 +171,7 @@ export const getIncomeCategoriesThunk = createAsyncThunk(
 );
 
 // Get expense category in eng
-export const getExpenseCategoriesThunk = createAsyncThunk(
+export const getExpensesCategoriesThunk = createAsyncThunk(
   'transactions/getExpenseCategories',
   async (_, { rejectWithValue }) => {
     try {

@@ -5,7 +5,9 @@ import { logoutThunk } from 'redux/auth/auth.thunk';
 import { transactionsInitialState } from './transactions.initial';
 import {
   getAllTransactionsThunk,
+  getExpensesCategoriesThunk,
   getExpenseThunk,
+  getIncomesCategoriesThunk,
   getIncomeThunk,
   getPeriodDataThunk,
 } from './transactions.thunk';
@@ -15,15 +17,25 @@ const transactionsSlice = createSlice({
   initialState: transactionsInitialState,
   extraReducers: builder => {
     builder
+      .addCase(getExpensesCategoriesThunk.fulfilled, (state, { payload }) => {
+        state.expenses.categories = payload;
+      })
+      .addCase(getIncomesCategoriesThunk.fulfilled, (state, { payload }) => {
+        state.incomes.categories = payload;
+      })
       .addCase(getExpenseThunk.fulfilled, (state, { payload }) => {
-        state.expenses = payload;
+        state.expenses.data = payload.data;
+        state.expenses.monthsStats = payload.monthsStats;
       })
       .addCase(getIncomeThunk.fulfilled, (state, { payload }) => {
-        state.incomes = payload;
+        state.incomes.data = payload.data;
+        state.incomes.monthsStats = payload.monthsStats;
       })
       .addCase(getAllTransactionsThunk.fulfilled, (state, { payload }) => {
-        state.incomes = payload.incomes;
-        state.expenses = payload.expenses;
+        state.incomes.data = payload.incomes.data;
+        state.incomes.monthsStats = payload.incomes.monthsStats;
+        state.expenses.data = payload.expenses.data;
+        state.expenses.monthsStats = payload.expenses.monthsStats;
       })
       .addCase(getPeriodDataThunk.fulfilled, (state, { payload }) => {
         state.period = payload;

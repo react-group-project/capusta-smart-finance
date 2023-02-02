@@ -1,6 +1,5 @@
 import { IoTrashOutline } from 'react-icons/io5';
 import styled from 'styled-components';
-import { theme } from 'theme';
 
 export const Icon = styled(IoTrashOutline)`
   width: 15px;
@@ -13,12 +12,12 @@ export const Tr = styled.tr`
 
   display: flex;
 
-  border-bottom: 2px solid ${theme.colors.grey.light};
+  border-bottom: 2px solid ${({ theme }) => theme.colors.grey.light};
 `;
 
 export const Td = styled.td`
-  color: ${theme.colors.grey.dark};
-  font-weight: ${theme.fontWeights.regular};
+  color: ${({ theme }) => theme.colors.grey.dark};
+  font-weight: ${({ theme }) => theme.fontWeights.regular};
 
   display: flex;
   align-items: center;
@@ -45,8 +44,9 @@ export const Td = styled.td`
 `;
 
 export const ExpenseTd = styled(Td)`
-  color: ${theme.colors.red.base};
-  font-weight: ${theme.fontWeights.bold};
+  color: ${({ theme, amount }) =>
+    amount < 0 ? theme.colors.red.base : theme.colors.green.base};
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
 `;
 
 export const Ttrash = styled(Td)`
@@ -56,6 +56,7 @@ export const Ttrash = styled(Td)`
 `;
 
 export const Button = styled.button`
+  cursor: pointer;
   width: 32px;
   height: 32px;
   padding: 0;
@@ -64,10 +65,12 @@ export const Button = styled.button`
   justify-content: center;
 
   border: none;
-  background-color: ${theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.white};
   border-radius: 50%;
-  cursor: pointer;
+
+  transition: ${({ theme }) => theme.transitions.create(['background-color'])};
+
   &:hover {
-    background-color: ${theme.colors.grey.light};
+    background-color: ${({ theme }) => theme.colors.grey.light};
   }
 `;
