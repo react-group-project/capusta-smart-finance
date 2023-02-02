@@ -24,14 +24,18 @@ const transactionsSlice = createSlice({
         state.incomes.categories = payload;
       })
       .addCase(getExpenseThunk.fulfilled, (state, { payload }) => {
-        state.expenses = { ...state.expenses, payload };
+        state.expenses.data = payload.data;
+        state.expenses.monthsStats = payload.monthsStats;
       })
       .addCase(getIncomeThunk.fulfilled, (state, { payload }) => {
-        state.incomes = { ...state.incomes, payload };
+        state.incomes.data = payload.data;
+        state.incomes.monthsStats = payload.monthsStats;
       })
       .addCase(getAllTransactionsThunk.fulfilled, (state, { payload }) => {
-        state.incomes = { ...state.incomes, payload };
-        state.expenses = { ...state.expenses, payload };
+        state.incomes.data = payload.incomes.data;
+        state.incomes.monthsStats = payload.incomes.monthsStats;
+        state.expenses.data = payload.expenses.data;
+        state.expenses.monthsStats = payload.expenses.monthsStats;
       })
       .addCase(getPeriodDataThunk.fulfilled, (state, { payload }) => {
         state.period = payload;
