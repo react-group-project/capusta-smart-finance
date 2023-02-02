@@ -18,6 +18,7 @@ import { theme } from 'theme';
 import { useMediaQuery } from 'react-responsive';
 import { useDispatch } from 'react-redux';
 import { getAllTransactionsThunk } from 'redux/transactions/transactions.thunk';
+import SkeletonLoader from 'components/transactions/SkeletonLoader';
 
 const iconColor = theme.colors.grey.dark;
 
@@ -63,7 +64,7 @@ export default function HomePage() {
             </HomeTabs>
 
             <HomeOutlet>
-              <Suspense fallback={null}>
+              <Suspense fallback={<SkeletonLoader />}>
                 <Outlet />
               </Suspense>
             </HomeOutlet>
