@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import DatePicker from 'react-datepicker';
 import { CalculatorIcon } from './calculator';
+import { ErrorText } from 'components/Auth/AuthForm';
 
 import { theme } from 'theme';
 
@@ -58,6 +59,7 @@ export const DateLabel = styled.label`
 `;
 
 export const InputWrapper = styled.div`
+  position: relative;
   width: 100%;
   margin-bottom: 80px;
   height: 100%;
@@ -257,5 +259,11 @@ export const BtnWrapper = styled.div`
   @media screen and (min-width: ${theme.breakpoints[1]}) {
     display: flex;
     gap: 16px;
+  }
+`;
+
+export const ErrorMessage = styled(ErrorText)`
+  @media screen and (min-width: ${theme.breakpoints.tablet}) {
+    left: 150px;
   }
 `;
