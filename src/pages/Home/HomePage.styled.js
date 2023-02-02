@@ -2,7 +2,6 @@ import { Box } from 'components/Box/Box.styled';
 import { routes } from 'constants/routes';
 import { Link, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import { color } from 'styled-system';
 
 export const HomeHeader = styled(Box)`
   display: flex;
