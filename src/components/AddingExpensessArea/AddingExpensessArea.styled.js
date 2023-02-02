@@ -256,7 +256,7 @@ export const BtnWrapper = styled.div`
   display: flex;
   gap: 20px;
 
-  @media screen and (min-width: ${theme.breakpoints[1]}) {
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints[1]}) {
     display: flex;
     gap: 16px;
   }
