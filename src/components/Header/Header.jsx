@@ -13,16 +13,19 @@ import ExitButton from './ExitButton';
 import Logo from '../Header/Logo/';
 import Modal from '../Modal/';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectToken } from 'redux/auth/auth.selectors';
+import { selectToken, selectLogoutStatus } from 'redux/auth/auth.selectors';
 import { selectUserEmail } from 'redux/user/user.selectors';
 import { logoutThunk } from 'redux/auth/auth.thunk';
 import ModalContent from 'components/Modal/ModalContent/ModalContent';
+import { Status } from 'constants';
+import AppSpinner from 'components/Spinner';
 
 export default function Header() {
+  const dispatch = useDispatch();
+  const logoutStatus = useSelector(selectLogoutStatus);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const isLoggedIn = useSelector(selectToken);
   const userEmail = useSelector(selectUserEmail);
-  const dispatch = useDispatch();
 
   const logOutHandler = () => {
     closeModalHandler();
@@ -53,7 +56,11 @@ export default function Header() {
               </UserInitials>
               <UserEmail>{userEmail}</UserEmail>
               <Decorline />
-              <ExitButton onClick={openModalHandler} />
+              {logoutStatus === Status.PENDING ? (
+                <AppSpinner size={8} />
+              ) : (
+                <ExitButton onClick={openModalHandler} />
+              )}
             </UserInfoWrapper>
           )}
           {isModalVisible && (

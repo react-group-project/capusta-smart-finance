@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import { routes } from 'constants/routes';
 import { loginThunk } from 'redux/auth/auth.thunk';
@@ -19,9 +19,13 @@ import {
 } from '../AuthForm';
 import { useForm } from 'react-hook-form';
 import { authValidation } from '../Auth.validation';
+import { selectLoginStatus } from 'redux/auth/auth.selectors';
+import { Status } from 'constants';
+import AppSpinner from 'components/Spinner/AppSpinner';
 
 export default function Login() {
   const dispatch = useDispatch();
+  const loginStatus = useSelector(selectLoginStatus);
   const location = useLocation();
 
   const {
@@ -96,7 +100,13 @@ export default function Login() {
           </FieldStyle>
           <FormButtonsLayout>
             {isSubmitting ? (
-              <>Loading...</>
+              <>
+                {loginStatus === Status.PENDING && (
+                  <>
+                    <AppSpinner />
+                  </>
+                )}
+              </>
             ) : (
               <>
                 <FormButton type="submit" isActive={true}>

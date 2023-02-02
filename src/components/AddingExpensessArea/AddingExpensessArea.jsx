@@ -1,6 +1,4 @@
 import { useForm, Controller } from 'react-hook-form';
-// import css from './Select.module.css';
-import { useState } from 'react';
 import Select from 'react-select';
 import 'react-datepicker/dist/react-datepicker.css';
 import {
@@ -18,23 +16,33 @@ import {
   InputWrapper,
   DescrWrapper,
   BtnWrapper,
+  ErrorMessage,
 } from './AddingExpensessArea.styled';
 // import { addExpenseThunk } from 'redux/transactions/transactions.thunk';
 import { useDispatch } from 'react-redux';
 import { format } from 'date-fns';
 import { CalendarIcon } from './calendar';
+import { useRef } from 'react';
 
 export const AddingExpensessArea = ({ categories, addFunction }) => {
-  const [startDate, setStartDate] = useState(() => new Date());
-
   const dispatch = useDispatch();
+  const selectRef = useRef(null);
 
-  const { control, handleSubmit, reset } = useForm({
+  const {
+    control,
+    handleSubmit,
+    reset,
+    setValue,
+    getValues,
+    setError,
+    formState: { errors },
+  } = useForm({
+    mode: 'onChange',
     defaultValues: {
       date: new Date(),
       description: '',
       amount: '',
-      // category: {},
+      category: null,
     },
   });
 
@@ -42,15 +50,24 @@ export const AddingExpensessArea = ({ categories, addFunction }) => {
     return { value: category.toLowerCase(), label: category };
   });
 
-  const onSubmit = e => {
-    const data = {
-      ...e,
-      category: e.category.label,
-      date: format(e.date, 'yyyy-MM-dd'),
-    };
-    dispatch(addFunction(data));
+  const onSubmit = data => {
+    if (!data.category) {
+      setError('category', { type: 'Custom', message: 'Category is required' });
+      return;
+    }
+    dispatch(
+      addFunction({
+        ...data,
+        category: data.category.label,
+        date: format(data.date, 'yyyy-MM-dd'),
+      })
+    );
+
+    selectRef.current.clearValue();
+
     reset();
   };
+  const err = Object.values(errors);
 
   return (
     <>
@@ -64,9 +81,9 @@ export const AddingExpensessArea = ({ categories, addFunction }) => {
               render={({ field }) => (
                 <StyledDatePicker
                   {...field}
-                  selected={startDate}
+                  selected={getValues(field.name)}
                   onChange={date => {
-                    return setStartDate(date);
+                    setValue(field.name, date);
                   }}
                   dateFormat="MM.dd.yyyy"
                 />
@@ -79,6 +96,9 @@ export const AddingExpensessArea = ({ categories, addFunction }) => {
                 value={control._defaultValues.description}
                 name="description"
                 control={control}
+                rules={{
+                  required: 'Description is requiered',
+                }}
                 render={({ field }) => (
                   <DescriptionInput
                     {...field}
@@ -99,6 +119,7 @@ export const AddingExpensessArea = ({ categories, addFunction }) => {
                     {...field}
                     options={options}
                     placeholder="Category"
+                    ref={selectRef}
                     styles={{
                       container: (baseStyles, state) => ({
                         ...baseStyles,
@@ -127,12 +148,18 @@ export const AddingExpensessArea = ({ categories, addFunction }) => {
               value={control._defaultValues.number}
               name="amount"
               control={control}
+              rules={{
+                validate: data =>
+                  data > 0 ? true : 'Amount must be greater than 0',
+              }}
               render={({ field }) => (
                 <AmountInput {...field} type="number" placeholder="0,00" />
               )}
             />
           </AmountLabel>
+          {err.length > 0 && <ErrorMessage>{err[0].message}</ErrorMessage>}
         </InputWrapper>
+
         <BtnWrapper>
           <SubmitBtn type="submit">Input</SubmitBtn>
           <ClearBtn type="button" onClick={() => reset()}>

@@ -10,10 +10,10 @@ import {
   Content,
   Amount,
   Icon,
-  Button,
   DescrWrapper,
 } from './MobTable.styled';
 import { selectSortedAllTransactionsData } from 'redux/transactions/transactions.selectors';
+import { DeleteButton } from 'components/Common/Button';
 
 export default function MobTable() {
   const dispatch = useDispatch();
@@ -36,9 +36,11 @@ export default function MobTable() {
               <Amount amount={amount}>
                 {convertMoneyToStringWithCurrency(amount)}
               </Amount>
-              <Button onClick={() => dispatch(deleteTransactionThunk(_id))}>
+              <DeleteButton
+                onClick={() => dispatch(deleteTransactionThunk(_id))}
+              >
                 <Icon />
-              </Button>
+              </DeleteButton>
             </EmountWrapper>
           </Item>
         );

@@ -2,6 +2,10 @@ import { createSelector } from '@reduxjs/toolkit';
 import orderBy from 'lodash.orderby';
 
 const selectTransactions = state => state.transactions;
+const selectStatuses = state => selectTransactions(state).statuses;
+
+export const selectGetPeriodStatus = state =>
+  selectStatuses(state).getPeriodData;
 
 export const selectExpenses = state => selectTransactions(state).expenses;
 export const selectExpensesData = state => selectExpenses(state).data;

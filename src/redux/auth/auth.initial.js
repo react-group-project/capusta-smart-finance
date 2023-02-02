@@ -5,7 +5,16 @@ export const authInitialState = {
   refreshToken: null,
   sid: null,
   isAuthorized: false,
-  isRefreshing: false,
-  status: Status.IDLE,
-  error: null,
+  statuses: {
+    login: Status.IDLE,
+    registration: Status.IDLE,
+    logout: Status.IDLE,
+    refreshToken: Status.IDLE,
+  },
+  errors: {
+    login: null,
+    registration: null,
+    logout: null,
+    refreshToken: null,
+  },
 };

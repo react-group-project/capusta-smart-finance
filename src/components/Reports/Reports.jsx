@@ -4,11 +4,18 @@ import { useSelector } from 'react-redux';
 import ReportsItem from './ReportsItem/ReportsItem';
 import { List, ReportContainer } from './Reports.styled';
 import ArrowButton from './ArrowButton/ArrowButton';
-import { selectPeriod } from 'redux/transactions/transactions.selectors';
+import {
+  selectGetPeriodStatus,
+  selectPeriod,
+} from 'redux/transactions/transactions.selectors';
 import NoFoundData from 'components/NoData/NoData';
+import { Status } from 'constants';
+import AppSpinner from 'components/Spinner/AppSpinner';
+import { Box } from 'components/Box/Box.styled';
 
 export default function Reports({ onChangeCategory, onChangeWages, wages }) {
   const data = useSelector(selectPeriod);
+  const periodStatus = useSelector(selectGetPeriodStatus);
   const statCategories = Object.entries(data[wages].data);
   const [activeIcon, setActiveIcon] = useState('');
 
@@ -31,7 +38,11 @@ export default function Reports({ onChangeCategory, onChangeWages, wages }) {
     <ReportContainer>
       <ArrowButton onChangeWages={onChangeWages} wages={wages} />
 
-      {statCategories.length > 0 ? (
+      {periodStatus === Status.PENDING ? (
+        <Box width="100%" textAlign="center" mt="20px">
+          <AppSpinner />
+        </Box>
+      ) : statCategories.length > 0 ? (
         <List>
           {statCategories.map(category => (
             <li
@@ -45,6 +56,7 @@ export default function Reports({ onChangeCategory, onChangeWages, wages }) {
       ) : (
         <NoFoundData />
       )}
+      {}
     </ReportContainer>
   );
 }
