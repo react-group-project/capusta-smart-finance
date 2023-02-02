@@ -18,15 +18,12 @@ import {
   BtnWrapper,
   ErrorMessage,
 } from './AddingExpensessArea.styled';
-// import { addExpenseThunk } from 'redux/transactions/transactions.thunk';
 import { useDispatch } from 'react-redux';
 import { format } from 'date-fns';
 import { CalendarIcon } from './calendar';
-import { useRef } from 'react';
 
 export const AddingExpensessArea = ({ categories, addFunction }) => {
   const dispatch = useDispatch();
-  const selectRef = useRef(null);
 
   const {
     control,
@@ -34,7 +31,6 @@ export const AddingExpensessArea = ({ categories, addFunction }) => {
     reset,
     setValue,
     getValues,
-    setError,
     formState: { errors },
   } = useForm({
     mode: 'onChange',
@@ -51,10 +47,6 @@ export const AddingExpensessArea = ({ categories, addFunction }) => {
   });
 
   const onSubmit = data => {
-    if (!data.category) {
-      setError('category', { type: 'Custom', message: 'Category is required' });
-      return;
-    }
     dispatch(
       addFunction({
         ...data,
@@ -62,8 +54,6 @@ export const AddingExpensessArea = ({ categories, addFunction }) => {
         date: format(data.date, 'yyyy-MM-dd'),
       })
     );
-
-    selectRef.current.clearValue();
 
     reset();
   };
@@ -114,12 +104,14 @@ export const AddingExpensessArea = ({ categories, addFunction }) => {
                 value={control._defaultValues.category}
                 name="category"
                 control={control}
+                rules={{
+                  validate: data => (data ? true : 'Category is requires'),
+                }}
                 render={({ field }) => (
                   <Select
                     {...field}
                     options={options}
                     placeholder="Category"
-                    ref={selectRef}
                     styles={{
                       container: (baseStyles, state) => ({
                         ...baseStyles,
