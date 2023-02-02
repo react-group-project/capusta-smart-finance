@@ -13,7 +13,7 @@ import Sports from 'components/Icons/Sports';
 import Technique from 'components/Icons/Technique';
 import Transport from 'components/Icons/Transport';
 import { Text } from 'components/Common/Text/Text.styled';
-import { Category, IconContainer } from './ReportsItem.styled';
+import { Category, IconContainer, StyledText } from './ReportsItem.styled';
 import { convertMoneyToString } from 'helpers';
 
 const categories = {
@@ -43,7 +43,7 @@ export default function ReportsItem({ category, activeIcon }) {
         <IconContainer>
           {<Component isActive={activeIcon === category[0]} />}
         </IconContainer>
-        <Text variant="uppercase">{category[0]}</Text>
+        <StyledText variant="uppercase">{category[0]}</StyledText>
       </Category>
     </>
   );
