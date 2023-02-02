@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { routes } from 'constants/routes';
 import { loginThunk, registrationThunk } from 'redux/auth/auth.thunk';
@@ -15,9 +15,17 @@ import {
 } from '../AuthForm';
 import { useForm } from 'react-hook-form';
 import { authValidation } from '../Auth.validation';
+import {
+  selectLoginStatus,
+  selectRegistrationStatus,
+} from 'redux/auth/auth.selectors';
+import { Status } from 'constants';
+import AppSpinner from 'components/Spinner/AppSpinner';
 
 export default function Registration() {
   const dispatch = useDispatch();
+  const registrationStatus = useSelector(selectRegistrationStatus);
+  const loginStatus = useSelector(selectLoginStatus);
 
   const {
     register,
@@ -104,7 +112,10 @@ export default function Registration() {
           </FieldStyle>
           <FormButtonsLayout>
             {isSubmitting ? (
-              <>Loading...</>
+              <>
+                {(registrationStatus === Status.PENDING ||
+                  loginStatus === Status.PENDING) && <AppSpinner />}
+              </>
             ) : (
               <>
                 <FormButton type="button" as={Link} to={routes.LOGIN}>
