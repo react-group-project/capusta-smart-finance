@@ -1,6 +1,6 @@
 import { useForm, Controller } from 'react-hook-form';
 // import css from './Select.module.css';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Select from 'react-select';
 import 'react-datepicker/dist/react-datepicker.css';
 import {
@@ -19,32 +19,22 @@ import {
   DescrWrapper,
   BtnWrapper,
 } from './AddingExpensessArea.styled';
-import {
-  addExpenseThunk,
-  getExpenseCategoriesThunk,
-} from 'redux/transactions/transactions.thunk';
+// import { addExpenseThunk } from 'redux/transactions/transactions.thunk';
 import { useDispatch } from 'react-redux';
 import { format } from 'date-fns';
 import { CalendarIcon } from './calendar';
 
-export const AddingExpensessArea = () => {
+export const AddingExpensessArea = ({ categories, addFunction }) => {
   const [startDate, setStartDate] = useState(() => new Date());
-  const [categories, setCategories] = useState([]);
 
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getExpenseCategoriesThunk()).then(data => {
-      setCategories(data.payload);
-    });
-  }, [dispatch]);
 
   const { control, handleSubmit, reset } = useForm({
     defaultValues: {
       date: new Date(),
       description: '',
       amount: '',
-      category: {},
+      // category: {},
     },
   });
 
@@ -58,7 +48,7 @@ export const AddingExpensessArea = () => {
       category: e.category.label,
       date: format(e.date, 'yyyy-MM-dd'),
     };
-    dispatch(addExpenseThunk(data));
+    dispatch(addFunction(data));
     reset();
   };
 
@@ -108,8 +98,7 @@ export const AddingExpensessArea = () => {
                   <Select
                     {...field}
                     options={options}
-                    placeholder="Select"
-                    className="zxc"
+                    placeholder="Category"
                     styles={{
                       container: (baseStyles, state) => ({
                         ...baseStyles,

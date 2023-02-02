@@ -55,7 +55,7 @@ export const addExpenseThunk = createAsyncThunk(
   'transactions/addExpense',
   async (body, { rejectWithValue, dispatch }) => {
     try {
-      console.log(body);
+      // console.log(body);
       const data = await addExpenseService({
         ...body,
         category: convertExpenseValueToRu(body.category),
