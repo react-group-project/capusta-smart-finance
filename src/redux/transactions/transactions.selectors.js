@@ -8,10 +8,28 @@ export const selectExpensesData = state => selectExpenses(state).data;
 export const selectExpensesMonthsStats = state =>
   selectExpenses(state).monthsStats;
 
+export const selectExpensesSortedLastSixMonths = createSelector(
+  selectExpensesMonthsStats,
+  months => {
+    const filteredMonth = months.filter(month => !isNaN(month.amount));
+
+    return orderBy(filteredMonth, ['id'], ['desc']);
+  }
+);
+
 export const selectIncomes = state => selectTransactions(state).incomes;
 export const selectIncomesData = state => selectIncomes(state).data;
 export const selectIncomesMonthsStats = state =>
   selectIncomes(state).monthsStats;
+
+export const selectIncomesSortedLastSixMonths = createSelector(
+  selectIncomesMonthsStats,
+  months => {
+    const filteredMonth = months.filter(month => !isNaN(month.amount));
+
+    return orderBy(filteredMonth, ['id'], ['desc']);
+  }
+);
 
 export const selectPeriod = state => selectTransactions(state).period;
 

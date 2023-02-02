@@ -1,15 +1,14 @@
 import styled from 'styled-components';
-import { theme } from 'theme';
 
 export const Tr = styled.tr`
-  border: 2px solid ${theme.colors.white};
+  border: 2px solid ${({ theme }) => theme.colors.white};
 `;
 
 export const Table = styled.table`
   margin-top: 30px;
   width: 213px;
 
-  background-color: ${theme.colors.grey.light};
+  background-color: ${({ theme }) => theme.colors.grey.light};
 `;
 
 export const Wrapper = styled.div`
@@ -22,17 +21,17 @@ export const ListHead = styled.h3`
   padding-top: 14px;
   padding-bottom: 14px;
 
-  background-color: ${theme.colors.grey.light};
-  border-bottom: 1px solid ${theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.grey.light};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.white};
   border-top-right-radius: 15px;
   border-top-left-radius: 15px;
 
   text-transform: uppercase;
 
-  font-size: ${theme.fontSizes[2]};
-  line-height: ${theme.lineHeights.base};
+  font-size: ${({ theme }) => theme.fontSizes[2]};
+  line-height: ${({ theme }) => theme.lineHeights.base};
 
-  color: ${theme.colors.black};
+  color: ${({ theme }) => theme.colors.black};
 `;
 
 export const List = styled.ul`
@@ -43,16 +42,15 @@ export const List = styled.ul`
 
   overflow: hidden;
 
-  background-color: ${theme.colors.grey.light};
+  background-color: ${({ theme }) => theme.colors.grey.light};
   border-bottom-right-radius: 15px;
 
-  font-weight: 400;
-  font-size: ${theme.fontSizes[2]};
-  line-height: ${theme.lineHeights.base};
-  letter-spacing: ${theme.letterSpacings.base};
+  font-size: ${({ theme }) => theme.fontSizes[2]};
+  line-height: ${({ theme }) => theme.lineHeights.base};
+  letter-spacing: ${({ theme }) => theme.letterSpacings.base};
   text-transform: uppercase;
 
-  color: ${theme.colors.grey.dark};
+  color: ${({ theme }) => theme.colors.grey.dark};
 `;
 
 export const Item = styled.li`
@@ -61,6 +59,9 @@ export const Item = styled.li`
   padding-right: 13px;
   padding-left: 13px;
 
-  background-color: ${theme.colors.grey.light};
-  border-top: 2px solid ${theme.colors.white};
+  padding-top: 12px;
+  padding-bottom: 12px;
+
+  background-color: ${({ theme }) => theme.colors.grey.light};
+  border-top: 2px solid ${({ theme }) => theme.colors.white};
 `;

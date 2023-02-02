@@ -43,16 +43,18 @@ export const App = () => {
   }, [dispatch]);
 
   // Google authtorization
-  if (window.location.pathname === '/') {
-    const params = new URLSearchParams(window.location.search);
+  useEffect(() => {
+    if (window.location.pathname === '/') {
+      const params = new URLSearchParams(window.location.search);
 
-    const accessToken = params.get('accessToken');
-    const refreshToken = params.get('refreshToken');
-    const sid = params.get('sid');
+      const accessToken = params.get('accessToken');
+      const refreshToken = params.get('refreshToken');
+      const sid = params.get('sid');
 
-    dispatch(addToken({ accessToken, refreshToken, sid }));
-    window.location.pathname = '/capusta-smart-finance' + routes.HOME;
-  }
+      dispatch(addToken({ accessToken, refreshToken, sid }));
+      window.location.pathname = '/capusta-smart-finance' + routes.HOME;
+    }
+  }, [dispatch]);
 
   return (
     <BrowserRouter basename="capusta-smart-finance">

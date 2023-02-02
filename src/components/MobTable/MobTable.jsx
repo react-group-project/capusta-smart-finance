@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { deleteTransactionThunk } from 'redux/transactions/transactions.thunk';
 import { convertMoneyToStringWithCurrency } from 'helpers';
 import {
@@ -8,14 +8,16 @@ import {
   List,
   Descr,
   Content,
-  Emout,
+  Amount,
   Icon,
   Button,
   DescrWrapper,
 } from './MobTable.styled';
+import { selectSortedAllTransactionsData } from 'redux/transactions/transactions.selectors';
 
-export const MobTable = ({ data }) => {
+export const MobTable = () => {
   const dispatch = useDispatch();
+  const data = useSelector(selectSortedAllTransactionsData);
 
   return (
     <List>
@@ -31,7 +33,9 @@ export const MobTable = ({ data }) => {
               </CategoryWrapper>
             </DescrWrapper>
             <EmountWrapper>
-              <Emout>{convertMoneyToStringWithCurrency(amount)}</Emout>
+              <Amount amount={amount}>
+                {convertMoneyToStringWithCurrency(amount)}
+              </Amount>
               <Button onClick={() => dispatch(deleteTransactionThunk(_id))}>
                 <Icon />
               </Button>

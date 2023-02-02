@@ -11,7 +11,9 @@ export const TableRow = ({ date, description, category, amount, id }) => {
       <Td>{date}</Td>
       <Td>{description}</Td>
       <Td>{category}</Td>
-      <ExpenseTd>{convertMoneyToStringWithCurrency(amount)}</ExpenseTd>
+      <ExpenseTd amount={amount}>
+        {convertMoneyToStringWithCurrency(amount)}
+      </ExpenseTd>
       <Ttrash trash>
         <Button
           type="button"
