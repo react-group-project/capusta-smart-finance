@@ -50,7 +50,8 @@ export default function Balance(props) {
       <Box width="100%" display="flex">
         <NumericFormat
           displayType="input"
-          value={balance.toFixed(2)}
+          value={balance}
+          defaultValue={balance.toFixed(2)}
           customInput={BalanceInput}
           valueIsNumericString={true}
           allowNegative
